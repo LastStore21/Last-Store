@@ -1,0 +1,8 @@
+Navbar
+HeroSection
+SearchBar
+CategoryCard
+AdCard
+FeaturedAds
+LatestAds
+Footer
