@@ -68,12 +68,12 @@ img.preview-img{width:80px;border-radius:8px;}
 <option value="5493865820180">Seller 6</option>
 <option value="573002560262">Seller 7</option>
 </select>
-<button class="send" onclick="sendOrder()">Send Order</button>
+<button class="send" id="sendBtn">Send Order</button>
 </div>
 
 <script>
-// ===== TODOS LOS ARTÍCULOS =====
-const data={
+// ===== DATOS =====
+const data = {
 speed:[
 {name:"1 Hour Speed Up",price:130},{name:"3 Hour Speed Up",price:300},{name:"8 Hour Speed Up",price:650},{name:"15 Hour Speed Up",price:1000},{name:"24 Hour Speed Up",price:1500},{name:"3 Day Speed Up",price:4400},{name:"7 Day Speed Up",price:10000},{name:"30 Day Speed Up",price:40000}
 ],
@@ -100,47 +100,54 @@ monster:[
 ];
 
 // ===== VARIABLES =====
-let cart={};
-const imageInput=document.getElementById("images");
-const preview=document.getElementById("preview");
+let cart = {};
+const itemsContainer = document.getElementById("items");
+const preview = document.getElementById("preview");
 
 // ===== FORMATO =====
 function format(n){return n.toLocaleString();}
 
 // ===== RENDER =====
 function render(){
-    const container=document.getElementById("items");
-    container.innerHTML="";
+    itemsContainer.innerHTML = "";
+    let idCounter = 0;
     for(const cat in data){
-        const section=document.createElement("div");
+        const section = document.createElement("div");
         section.className="section";
         section.dataset.cat=cat;
         section.innerHTML=`<h2>${cat.toUpperCase()}</h2><div class="grid"></div>`;
+        const grid = section.querySelector(".grid");
         data[cat].forEach(item=>{
-            const id=item.name.replace(/[^a-zA-Z0-9]/g,"_");
-            const card=document.createElement("div");
+            const id = `item_${idCounter++}`;
+            item._id = id; // Guardar ID en el objeto
+            const card = document.createElement("div");
             card.className="card";
             card.innerHTML=`
                 <h3>${item.name}</h3>
                 <div class="price">${format(item.price)} Gems</div>
                 <div class="qty-control">
-                    <button onclick="update('${id}',-1)">-</button>
+                    <button class="minus">-</button>
                     <div class="qty" id="${id}">0</div>
-                    <button onclick="update('${id}',1)">+</button>
+                    <button class="plus">+</button>
                 </div>
             `;
-            section.querySelector(".grid").appendChild(card);
+            grid.appendChild(card);
+
+            // Eventos
+            card.querySelector(".plus").addEventListener("click", ()=>update(item,1));
+            card.querySelector(".minus").addEventListener("click", ()=>update(item,-1));
         });
-        container.appendChild(section);
+        itemsContainer.appendChild(section);
     }
 }
 
 // ===== UPDATE =====
-function update(id,change){
+function update(item,change){
+    const id = item._id;
     if(!cart[id]) cart[id]=0;
     cart[id]+=change;
     if(cart[id]<0) cart[id]=0;
-    document.getElementById(id).innerText=cart[id];
+    document.getElementById(id).innerText = cart[id];
     updateSummary();
 }
 
@@ -149,11 +156,11 @@ function updateSummary(){
     let total=0,summary="";
     for(const cat in data){
         data[cat].forEach(item=>{
-            const id=item.name.replace(/[^a-zA-Z0-9]/g,"_");
+            const id = item._id;
             if(cart[id]>0){
-                let subtotal=cart[id]*item.price;
+                const subtotal = cart[id]*item.price;
                 total+=subtotal;
-                summary+=`<div class="summary-item">${item.name} x${cart[id]} = ${format(subtotal)}</div>`;
+                summary += `<div class="summary-item">${item.name} x${cart[id]} = ${format(subtotal)}</div>`;
             }
         });
     }
@@ -163,27 +170,27 @@ function updateSummary(){
 
 // ===== SEARCH =====
 document.getElementById("search").addEventListener("input",function(){
-    const value=this.value.toLowerCase();
+    const val = this.value.toLowerCase();
     document.querySelectorAll(".card").forEach(card=>{
-        card.style.display=card.innerText.toLowerCase().includes(value)?"block":"none";
+        card.style.display = card.innerText.toLowerCase().includes(val)?"block":"none";
     });
 });
 
 // ===== FILTER =====
 document.getElementById("filter").addEventListener("change",function(){
-    const value=this.value;
+    const val=this.value;
     document.querySelectorAll(".section").forEach(sec=>{
-        sec.style.display=(value==="all"||sec.dataset.cat===value)?"block":"none";
+        sec.style.display=(val==="all"||sec.dataset.cat===val)?"block":"none";
     });
 });
 
 // ===== IMAGE PREVIEW =====
-imageInput.addEventListener("change",function(){
+document.getElementById("images").addEventListener("change",function(){
     preview.innerHTML="";
     Array.from(this.files).forEach(file=>{
-        const reader=new FileReader();
+        const reader = new FileReader();
         reader.onload=function(e){
-            const img=document.createElement("img");
+            const img = document.createElement("img");
             img.src=e.target.result;
             img.className="preview-img";
             preview.appendChild(img);
@@ -193,28 +200,28 @@ imageInput.addEventListener("change",function(){
 });
 
 // ===== SEND WHATSAPP =====
-function sendOrder(){
-    let msg="🔥 LAST STORE ORDER 🔥%0A%0A";
-    let total=0;
+document.getElementById("sendBtn").addEventListener("click",()=>{
+    let msg = "🔥 LAST STORE ORDER 🔥%0A%0A";
+    let total = 0;
     for(const cat in data){
         data[cat].forEach(item=>{
-            const id=item.name.replace(/[^a-zA-Z0-9]/g,"_");
+            const id = item._id;
             if(cart[id]>0){
-                msg+=item.name+" x"+cart[id]+"%0A";
-                total+=cart[id]*item.price;
+                msg += `${item.name} x${cart[id]}%0A`;
+                total += cart[id]*item.price;
             }
         });
     }
-    if(imageInput.files.length>0){
-        msg+="%0AClient will send "+imageInput.files.length+" screenshot(s) after this message.%0A";
+    if(document.getElementById("images").files.length>0){
+        msg += `%0AClient will send ${document.getElementById("images").files.length} screenshot(s) after this message.%0A`;
     }
-    msg+="%0ATotal Gems: "+format(total);
-    const seller=document.getElementById("seller").value;
-    window.location.href="https://wa.me/"+seller+"?text="+msg;
-}
+    msg += `%0ATotal Gems: ${format(total)}`;
+    const seller = document.getElementById("seller").value;
+    window.location.href = `https://wa.me/${seller}?text=${msg}`;
+});
 
 // ===== INIT =====
-render();
+window.onload = render;
 </script>
 </body>
 </html>
