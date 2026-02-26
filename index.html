@@ -10,69 +10,17 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
 body{background:#0d1117;color:#fff;}
-header{
-background:#111827;
-padding:20px 40px;
-display:flex;
-align-items:center;
-border-bottom:2px solid #1f2937;
-}
+header{background:#111827;padding:20px 40px;display:flex;align-items:center;border-bottom:2px solid #1f2937;}
 .logo svg{height:55px;}
 .container{max-width:1200px;margin:auto;padding:30px;}
-.section{
-background:#111827;
-margin-bottom:25px;
-padding:25px;
-border-radius:15px;
-box-shadow:0 0 20px rgba(0,0,0,0.4);
-}
-.section h2{
-margin-bottom:20px;
-font-family:Orbitron;
-color:#facc15;
-}
-.item{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:12px;
-background:#1f2937;
-padding:10px 15px;
-border-radius:10px;
-}
-.item input{
-width:80px;
-padding:5px;
-background:#0d1117;
-border:1px solid #333;
-color:white;
-text-align:center;
-}
-.total-box{
-background:#0f172a;
-padding:20px;
-border-radius:15px;
-text-align:center;
-font-size:22px;
-font-weight:600;
-margin-top:20px;
-}
-select,button{
-width:100%;
-padding:12px;
-margin-top:12px;
-border-radius:10px;
-border:none;
-font-size:15px;
-}
+.section{background:#111827;margin-bottom:25px;padding:25px;border-radius:15px;box-shadow:0 0 20px rgba(0,0,0,0.4);}
+.section h2{margin-bottom:20px;font-family:Orbitron;color:#facc15;}
+.item{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;background:#1f2937;padding:10px 15px;border-radius:10px;}
+.item input{width:80px;padding:5px;background:#0d1117;border:1px solid #333;color:white;text-align:center;}
+.total-box{background:#0f172a;padding:20px;border-radius:15px;text-align:center;font-size:22px;font-weight:600;margin-top:20px;}
+select,button{width:100%;padding:12px;margin-top:12px;border-radius:10px;border:none;font-size:15px;}
 select{background:#1f2937;color:white;}
-button{
-background:#facc15;
-color:black;
-font-weight:700;
-cursor:pointer;
-transition:0.3s;
-}
+button{background:#facc15;color:black;font-weight:700;cursor:pointer;transition:0.3s;}
 button:hover{background:#eab308;}
 footer{text-align:center;padding:20px;color:#777;}
 </style>
@@ -160,7 +108,6 @@ Total Gems: <span id="total">0</span>
 </div>
 
 <select id="seller">
-<option value="random">Random Seller</option>
 <option value="51950501387">+51 950 501 387</option>
 <option value="5491167662445">+54 9 11 6766 2445</option>
 <option value="584245125670">+58 424 512 5670</option>
@@ -192,7 +139,7 @@ totalDisplay.innerText=total.toLocaleString();
 
 function sendOrder(){
 let total=0;
-let message="Hello, I want to order:%0A";
+let message="Hello, I want to place this order:%0A";
 
 inputs.forEach(i=>{
 if(i.value>0){
@@ -206,20 +153,7 @@ if(total===0){alert("Select at least one item.");return;}
 
 message+="%0ATotal Gems: "+total.toLocaleString();
 
-const sellers=[
-"51950501387",
-"5491167662445",
-"584245125670",
-"584121935238",
-"51955121605",
-"5493865820180",
-"573002560262"
-];
-
 let selected=document.getElementById('seller').value;
-if(selected==="random"){
-selected=sellers[Math.floor(Math.random()*sellers.length)];
-}
 
 window.location.href="https://wa.me/"+selected+"?text="+message;
 }
