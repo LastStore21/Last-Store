@@ -1,262 +1,231 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Last Store - Calculadora Oficial</title>
+<title>Last Store | Calculadora Oficial</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
 body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#0f0f0f;
-    color:white;
+background:linear-gradient(135deg,#0f1115,#1a1f2b);
+color:#fff;
 }
-
 header{
-    background:linear-gradient(90deg,#00c6ff,#0072ff);
-    padding:20px;
-    text-align:center;
-    font-size:22px;
-    font-weight:bold;
+text-align:center;
+padding:40px 20px;
+background:#11141c;
+border-bottom:1px solid #1f2430;
 }
-
+header h1{
+font-size:32px;
+font-weight:700;
+letter-spacing:2px;
+}
+header p{
+opacity:.6;
+margin-top:8px;
+}
 .container{
-    padding:15px;
-    max-width:900px;
-    margin:auto;
+width:95%;
+max-width:1100px;
+margin:30px auto;
 }
-
-.section{
-    background:#1c1c1c;
-    margin-bottom:15px;
-    border-radius:12px;
-    overflow:hidden;
+.card{
+background:#161a23;
+padding:25px;
+border-radius:15px;
+margin-bottom:25px;
+border:1px solid #222836;
+box-shadow:0 5px 25px rgba(0,0,0,.4);
 }
-
-.section-header{
-    padding:15px;
-    cursor:pointer;
-    background:#222;
-    font-weight:bold;
+.card h2{
+margin-bottom:20px;
+font-size:20px;
+border-left:4px solid #4da3ff;
+padding-left:10px;
 }
-
-.section-content{
-    display:none;
-    padding:15px;
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:15px;
 }
-
-.item{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:8px;
+input,select{
+width:100%;
+padding:12px;
+border-radius:8px;
+border:1px solid #2a3142;
+background:#0f131b;
+color:#fff;
 }
-
-input[type=number]{
-    width:70px;
-    border:none;
-    border-radius:6px;
-    padding:5px;
+input:focus,select:focus{
+outline:none;
+border-color:#4da3ff;
 }
-
-select, textarea, input[type=text]{
-    width:100%;
-    padding:8px;
-    border:none;
-    border-radius:6px;
-    margin-top:8px;
+.btn{
+width:100%;
+padding:14px;
+border:none;
+border-radius:10px;
+font-weight:600;
+cursor:pointer;
+margin-top:15px;
+transition:.3s;
 }
-
-button{
-    margin-top:15px;
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:8px;
-    background:#00c6ff;
-    font-weight:bold;
-    cursor:pointer;
+.btn-whatsapp{
+background:#25D366;
+color:#fff;
 }
-
-button:hover{
-    background:#0072ff;
-    color:white;
+.btn-whatsapp:hover{
+background:#1ebe5d;
 }
-
 .total-box{
-    position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;
-    background:#000;
-    padding:12px;
-    text-align:center;
-    font-size:18px;
-    border-top:2px solid #00c6ff;
+background:#0f131b;
+padding:20px;
+border-radius:12px;
+border:1px solid #2a3142;
+margin-top:15px;
+}
+.total-box h3{
+font-weight:400;
+opacity:.7;
+}
+.total-box span{
+font-size:30px;
+font-weight:700;
+color:#4da3ff;
+}
+#resumen{
+margin-top:15px;
+font-size:14px;
+opacity:.85;
+white-space:pre-line;
+}
+@media(max-width:600px){
+header h1{font-size:24px}
 }
 </style>
 </head>
 
 <body>
 
-<header>💎 LAST STORE - CALCULADORA OFICIAL 💎</header>
-
-<div class="container" id="catalogo"></div>
+<header>
+<h1>LAST STORE</h1>
+<p>Calculadora Profesional de Gemas</p>
+</header>
 
 <div class="container">
 
-<h3>📝 Datos del Pedido</h3>
-<input type="text" id="jugador" placeholder="Nombre del jugador">
-<textarea id="nota" placeholder="Notas adicionales (opcional)"></textarea>
-
-<label>Seleccionar vendedor:</label>
+<div class="card">
+<h2>Datos del Cliente</h2>
+<input type="text" id="nombre" placeholder="Nombre del Cliente">
+<br><br>
 <select id="vendedor">
-<option value="51950501387">Perú 1</option>
-<option value="5491167662445">Argentina 1</option>
-<option value="584245125670">Venezuela 1</option>
-<option value="584121935238">Venezuela 2</option>
-<option value="51955121605">Perú 2</option>
-<option value="5493865820180">Argentina 2</option>
-<option value="573002560262">Colombia</option>
+<option value="573002560262">+57 3002560262</option>
+<option value="51950501387">+51 950501387</option>
+<option value="5491167662445">+54 9 11 67662445</option>
+<option value="584245125670">+58 4245125670</option>
+<option value="584121935238">+58 4121935238</option>
+<option value="51955121605">+51 955121605</option>
+<option value="5493865820180">+54 9 3865820180</option>
 </select>
-
-<button onclick="enviarPedido()">Enviar Pedido</button>
-
+<br><br>
+<input type="text" id="metodo" placeholder="Método de Pago">
 </div>
 
+<div class="card">
+<h2>Escudos</h2>
+<div class="grid">
+<input type="number" id="shield8" placeholder="8h (500)">
+<input type="number" id="shield24" placeholder="24h (1000)">
+<input type="number" id="shield3d" placeholder="3d (3500)">
+<input type="number" id="shield7d" placeholder="7d (10000)">
+</div>
+</div>
+
+<div class="card">
+<h2>Speed Ups</h2>
+<div class="grid">
+<input type="number" id="sp1h" placeholder="1h (130)">
+<input type="number" id="sp3h" placeholder="3h (300)">
+<input type="number" id="sp8h" placeholder="8h (650)">
+<input type="number" id="sp24h" placeholder="24h (1500)">
+<input type="number" id="sp3d" placeholder="3d (4400)">
+<input type="number" id="sp7d" placeholder="7d (10000)">
+</div>
+</div>
+
+<div class="card">
+<h2>Boosts</h2>
+<div class="grid">
+<input type="number" id="atk12" placeholder="Atk 20% 12h (250)">
+<input type="number" id="atk24" placeholder="Atk 20% 24h (400)">
+<input type="number" id="army20" placeholder="Army Size 20% (2400)">
+<input type="number" id="army50" placeholder="Army Size 50% (5000)">
+</div>
+</div>
+
+<div class="card">
+<h2>Resumen del Pedido</h2>
 <div class="total-box">
-Total: <span id="total">0</span> gemas 💎
+<h3>Total en Gemas</h3>
+<span id="total">0</span>
+</div>
+<div id="resumen"></div>
+<button class="btn btn-whatsapp" onclick="enviarPedido()">Enviar Pedido por WhatsApp</button>
+</div>
+
 </div>
 
 <script>
-
-const catalogo = {
-"🛡 Escudos":[
-["8h",1000],["24h",10000],["3 días",30000],["7 días",70000]
-],
-"📍 Relocadores":[
-["Aleatorio",1000],["Avanzado",2000],["Líder",5000]
-],
-"⏱ Speed Ups":[
-["1m",25],["5m",125],["15m",375],["30m",750],
-["1h",1500],["3h",4500],["8h",12000],
-["24h",15000],["3 días",45000],["7 días",105000]
-],
-"⚔ Boosts":[
-["Ataque 20%",5000],["Defensa 20%",5000],
-["HP 20%",5000],["Ejército 50%",15000],
-["Construcción 20%",5000],["Investigación 20%",5000]
-],
-"🧱 Recursos":[
-["Comida 1M",1500],["Piedra 1M",1500],
-["Madera 1M",1500],["Mineral 1M",1500],
-["Oro 500k",2000]
-],
-"👑 Especiales":[
-["Reset Talentos",2000],
-["Cambio Nombre",1000],
-["Migración Reino",15000]
-]
+const precios = {
+shield8:500,
+shield24:1000,
+shield3d:3500,
+shield7d:10000,
+sp1h:130,
+sp3h:300,
+sp8h:650,
+sp24h:1500,
+sp3d:4400,
+sp7d:10000,
+atk12:250,
+atk24:400,
+army20:2400,
+army50:5000
 };
 
-let total = 0;
-let resumen = [];
-
-function crearCatalogo(){
-const contenedor = document.getElementById("catalogo");
-
-for(let seccion in catalogo){
-
-let div = document.createElement("div");
-div.className = "section";
-
-let header = document.createElement("div");
-header.className = "section-header";
-header.innerText = seccion;
-header.onclick = function(){
-let content = this.nextElementSibling;
-content.style.display = content.style.display==="block"?"none":"block";
-};
-
-let content = document.createElement("div");
-content.className = "section-content";
-
-catalogo[seccion].forEach(item=>{
-let row = document.createElement("div");
-row.className="item";
-
-let label = document.createElement("span");
-label.innerText = item[0]+" ("+item[1]+" gemas)";
-
-let input = document.createElement("input");
-input.type="number";
-input.min="0";
-input.value="0";
-
-input.oninput = function(){
-calcularTotal();
-};
-
-input.dataset.nombre=item[0];
-input.dataset.gemas=item[1];
-
-row.appendChild(label);
-row.appendChild(input);
-content.appendChild(row);
-});
-
-div.appendChild(header);
-div.appendChild(content);
-contenedor.appendChild(div);
+function calcular(){
+let total=0;
+let resumen="";
+for(let id in precios){
+let cantidad=parseInt(document.getElementById(id).value)||0;
+if(cantidad>0){
+let subtotal=cantidad*precios[id];
+total+=subtotal;
+resumen+=cantidad+" x "+id+" = "+subtotal+" gemas\n";
 }
 }
-
-function calcularTotal(){
-total = 0;
-resumen = [];
+document.getElementById("total").innerText=total;
+document.getElementById("resumen").innerText=resumen;
+return total;
+}
 
 document.querySelectorAll("input[type=number]").forEach(input=>{
-let cantidad = parseInt(input.value)||0;
-if(cantidad>0){
-let subtotal = cantidad * input.dataset.gemas;
-total += subtotal;
-resumen.push(cantidad+"x "+input.dataset.nombre+" = "+subtotal+" gemas");
-}
+input.addEventListener("input",calcular);
 });
 
-document.getElementById("total").innerText = total.toLocaleString();
-}
-
 function enviarPedido(){
+let total=calcular();
+let nombre=document.getElementById("nombre").value;
+let metodo=document.getElementById("metodo").value;
+let vendedor=document.getElementById("vendedor").value;
 
-if(total===0){
-alert("Selecciona al menos un artículo.");
-return;
+let mensaje=`Pedido Last Store%0ACliente: ${nombre}%0AMétodo de pago: ${metodo}%0ATotal: ${total} gemas`;
+
+window.location.href=`https://wa.me/${vendedor}?text=${mensaje}`;
 }
-
-let jugador = document.getElementById("jugador").value || "No especificado";
-let nota = document.getElementById("nota").value || "Ninguna";
-let vendedor = document.getElementById("vendedor").value;
-
-let mensaje = `🔥 Nuevo Pedido - Last Store 🔥
-
-Jugador: ${jugador}
-
-📦 Detalle:
-${resumen.join("\n")}
-
-💎 TOTAL: ${total.toLocaleString()} gemas
-
-📝 Nota:
-${nota}
-`;
-
-let url = "https://wa.me/"+vendedor+"?text="+encodeURIComponent(mensaje);
-
-window.location.href = url;
-}
-
-crearCatalogo();
-
 </script>
 
 </body>
