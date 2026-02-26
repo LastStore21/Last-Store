@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Last Store - Calculadora Oficial</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#0f0f0f;
+    color:white;
+}
+
+header{
+    background:linear-gradient(90deg,#00c6ff,#0072ff);
+    padding:20px;
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.container{
+    padding:15px;
+    max-width:900px;
+    margin:auto;
+}
+
+.section{
+    background:#1c1c1c;
+    margin-bottom:15px;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+.section-header{
+    padding:15px;
+    cursor:pointer;
+    background:#222;
+    font-weight:bold;
+}
+
+.section-content{
+    display:none;
+    padding:15px;
+}
+
+.item{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:8px;
+}
+
+input[type=number]{
+    width:70px;
+    border:none;
+    border-radius:6px;
+    padding:5px;
+}
+
+select, textarea, input[type=text]{
+    width:100%;
+    padding:8px;
+    border:none;
+    border-radius:6px;
+    margin-top:8px;
+}
+
+button{
+    margin-top:15px;
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#00c6ff;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0072ff;
+    color:white;
+}
+
+.total-box{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#000;
+    padding:12px;
+    text-align:center;
+    font-size:18px;
+    border-top:2px solid #00c6ff;
+}
+</style>
+</head>
+
+<body>
+
+<header>💎 LAST STORE - CALCULADORA OFICIAL 💎</header>
+
+<div class="container" id="catalogo"></div>
+
+<div class="container">
+
+<h3>📝 Datos del Pedido</h3>
+<input type="text" id="jugador" placeholder="Nombre del jugador">
+<textarea id="nota" placeholder="Notas adicionales (opcional)"></textarea>
+
+<label>Seleccionar vendedor:</label>
+<select id="vendedor">
+<option value="51950501387">Perú 1</option>
+<option value="5491167662445">Argentina 1</option>
+<option value="584245125670">Venezuela 1</option>
+<option value="584121935238">Venezuela 2</option>
+<option value="51955121605">Perú 2</option>
+<option value="5493865820180">Argentina 2</option>
+<option value="573002560262">Colombia</option>
+</select>
+
+<button onclick="enviarPedido()">Enviar Pedido</button>
+
+</div>
+
+<div class="total-box">
+Total: <span id="total">0</span> gemas 💎
+</div>
+
+<script>
+
+const catalogo = {
+"🛡 Escudos":[
+["8h",1000],["24h",10000],["3 días",30000],["7 días",70000]
+],
+"📍 Relocadores":[
+["Aleatorio",1000],["Avanzado",2000],["Líder",5000]
+],
+"⏱ Speed Ups":[
+["1m",25],["5m",125],["15m",375],["30m",750],
+["1h",1500],["3h",4500],["8h",12000],
+["24h",15000],["3 días",45000],["7 días",105000]
+],
+"⚔ Boosts":[
+["Ataque 20%",5000],["Defensa 20%",5000],
+["HP 20%",5000],["Ejército 50%",15000],
+["Construcción 20%",5000],["Investigación 20%",5000]
+],
+"🧱 Recursos":[
+["Comida 1M",1500],["Piedra 1M",1500],
+["Madera 1M",1500],["Mineral 1M",1500],
+["Oro 500k",2000]
+],
+"👑 Especiales":[
+["Reset Talentos",2000],
+["Cambio Nombre",1000],
+["Migración Reino",15000]
+]
+};
+
+let total = 0;
+let resumen = [];
+
+function crearCatalogo(){
+const contenedor = document.getElementById("catalogo");
+
+for(let seccion in catalogo){
+
+let div = document.createElement("div");
+div.className = "section";
+
+let header = document.createElement("div");
+header.className = "section-header";
+header.innerText = seccion;
+header.onclick = function(){
+let content = this.nextElementSibling;
+content.style.display = content.style.display==="block"?"none":"block";
+};
+
+let content = document.createElement("div");
+content.className = "section-content";
+
+catalogo[seccion].forEach(item=>{
+let row = document.createElement("div");
+row.className="item";
+
+let label = document.createElement("span");
+label.innerText = item[0]+" ("+item[1]+" gemas)";
+
+let input = document.createElement("input");
+input.type="number";
+input.min="0";
+input.value="0";
+
+input.oninput = function(){
+calcularTotal();
+};
+
+input.dataset.nombre=item[0];
+input.dataset.gemas=item[1];
+
+row.appendChild(label);
+row.appendChild(input);
+content.appendChild(row);
+});
+
+div.appendChild(header);
+div.appendChild(content);
+contenedor.appendChild(div);
+}
+}
+
+function calcularTotal(){
+total = 0;
+resumen = [];
+
+document.querySelectorAll("input[type=number]").forEach(input=>{
+let cantidad = parseInt(input.value)||0;
+if(cantidad>0){
+let subtotal = cantidad * input.dataset.gemas;
+total += subtotal;
+resumen.push(cantidad+"x "+input.dataset.nombre+" = "+subtotal+" gemas");
+}
+});
+
+document.getElementById("total").innerText = total.toLocaleString();
+}
+
+function enviarPedido(){
+
+if(total===0){
+alert("Selecciona al menos un artículo.");
+return;
+}
+
+let jugador = document.getElementById("jugador").value || "No especificado";
+let nota = document.getElementById("nota").value || "Ninguna";
+let vendedor = document.getElementById("vendedor").value;
+
+let mensaje = `🔥 Nuevo Pedido - Last Store 🔥
+
+Jugador: ${jugador}
+
+📦 Detalle:
+${resumen.join("\n")}
+
+💎 TOTAL: ${total.toLocaleString()} gemas
+
+📝 Nota:
+${nota}
+`;
+
+let url = "https://wa.me/"+vendedor+"?text="+encodeURIComponent(mensaje);
+
+window.location.href = url;
+}
+
+crearCatalogo();
+
+</script>
+
+</body>
+</html>
