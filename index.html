@@ -3,103 +3,116 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Last Store Elite</title>
+<title>Last Store — Gem Calculator</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
 
 body{
-background:linear-gradient(135deg,#0a1f44,#07142c);
-color:white;
+  background:linear-gradient(135deg,#0a1f44,#07142c);
+  color:white;
+  min-height:100vh;
 }
 
 header{
-text-align:center;
-padding:40px 20px;
-font-size:48px;
-font-weight:900;
-background:linear-gradient(90deg,#00aaff,#005eff);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+  text-align:center;
+  padding:40px 0;
+  font-size:48px;
+  font-weight:bold;
+  background:linear-gradient(90deg,#00aaff,#005eff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
-.container{max-width:1200px;margin:auto;padding:20px;}
-
-.top-controls{
-display:flex;
-flex-wrap:wrap;
-gap:15px;
-margin-bottom:20px;
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:15px;
 }
 
-input[type="text"], select{
-padding:10px;
-border-radius:8px;
-border:none;
+.controls{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.controls input, .controls select{
+  flex:1;
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  font-size:16px;
 }
 
 .section{
-margin-bottom:30px;
+  margin-bottom:30px;
 }
 
 .section h2{
-margin-bottom:15px;
-border-bottom:2px solid #00aaff;
-padding-bottom:8px;
+  font-size:24px;
+  margin-bottom:15px;
+  border-bottom:2px solid #00aaff;
+  padding-bottom:8px;
 }
 
 .item{
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:#0f2d66;
-padding:12px;
-border-radius:10px;
-margin-bottom:10px;
-transition:.2s;
+  background:#0f2d66;
+  padding:12px;
+  border-radius:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+  transition:.2s;
 }
-
 .item:hover{
-transform:scale(1.02);
-background:#143b85;
+  transform:scale(1.02);
+  background:#143b85;
 }
-
+.item span.name{font-weight:600;}
+.item span.price{color:#00c3ff;}
 .item input{
-width:70px;
-padding:6px;
-border-radius:6px;
-border:none;
-text-align:center;
+  width:70px;
+  padding:6px;
+  border-radius:6px;
+  border:none;
+  text-align:center;
 }
 
 .total-box{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-background:#081833;
-padding:20px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-box-shadow:0 -5px 20px rgba(0,0,0,.6);
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#081833;
+  padding:20px;
+  box-shadow:0 -5px 20px rgba(0,0,0,.6);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
 button{
-padding:12px 25px;
-border:none;
-border-radius:8px;
-background:linear-gradient(90deg,#00aaff,#005eff);
-color:white;
-font-weight:bold;
-cursor:pointer;
+  padding:12px 24px;
+  border:none;
+  border-radius:8px;
+  background:linear-gradient(90deg,#00aaff,#005eff);
+  color:white;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
 }
-
 button:hover{
-transform:scale(1.05);
+  transform:scale(1.05);
 }
 
-.spacer{height:120px;}
+input[type="text"]{
+  width:100%;
+  padding:10px;
+  border-radius:6px;
+  border:none;
+  margin-top:10px;
+}
 </style>
 </head>
 
@@ -109,91 +122,128 @@ transform:scale(1.05);
 
 <div class="container">
 
-<div class="top-controls">
-<input type="text" id="search" placeholder="Search item...">
-<select id="filter">
-<option value="all">All Categories</option>
-<option value="speed">Speed Ups</option>
-<option value="combat">Combat</option>
-</select>
+<div class="controls">
+  <input type="text" id="search" placeholder="Search item...">
+  <select id="filter">
+    <option value="all">All Categories</option>
+    <option value="speed">Speed Ups</option>
+    <option value="combat">Combat</option>
+    <option value="boost">Boost</option>
+    <option value="resources">Resources</option>
+    <option value="chests">Chests</option>
+    <option value="building">Building</option>
+    <option value="familiar">Familiar</option>
+    <option value="monster">Monster Hunt</option>
+  </select>
 </div>
 
-<div class="section" data-category="speed">
+<!-- SPEED UPS -->
+<div class="section" data-cat="speed">
 <h2>Speed Ups</h2>
 
-<div class="item">1 Hour (130)
-<input type="number" data-price="130" value="0"></div>
-
-<div class="item">3 Hours (300)
-<input type="number" data-price="300" value="0"></div>
-
-<div class="item">8 Hours (650)
-<input type="number" data-price="650" value="0"></div>
-
-<div class="item">15 Hours (1000)
-<input type="number" data-price="1000" value="0"></div>
-
-<div class="item">24 Hours (1500)
-<input type="number" data-price="1500" value="0"></div>
-
-<div class="item">3 Days (4400)
-<input type="number" data-price="4400" value="0"></div>
-
-<div class="item">7 Days (10000)
-<input type="number" data-price="10000" value="0"></div>
-
-<div class="item">30 Days (40000)
-<input type="number" data-price="40000" value="0"></div>
+<div class="item"><span class="name">1 Hour</span><span class="price">130</span><input type="number" data-price="130" value="0"></div>
+<div class="item"><span class="name">3 Hours</span><span class="price">300</span><input type="number" data-price="300" value="0"></div>
+<div class="item"><span class="name">8 Hours</span><span class="price">650</span><input type="number" data-price="650" value="0"></div>
+<div class="item"><span class="name">15 Hours</span><span class="price">1000</span><input type="number" data-price="1000" value="0"></div>
+<div class="item"><span class="name">24 Hours</span><span class="price">1500</span><input type="number" data-price="1500" value="0"></div>
+<div class="item"><span class="name">3 Days</span><span class="price">4400</span><input type="number" data-price="4400" value="0"></div>
+<div class="item"><span class="name">7 Days</span><span class="price">10000</span><input type="number" data-price="10000" value="0"></div>
+<div class="item"><span class="name">30 Days</span><span class="price">40000</span><input type="number" data-price="40000" value="0"></div>
 
 </div>
 
-<div class="section" data-category="combat">
+<!-- COMBAT -->
+<div class="section" data-cat="combat">
 <h2>Combat</h2>
 
-<div class="item">Braveheart (2000)
-<input type="number" data-price="2000" value="0"></div>
-
-<div class="item">Relocator (1500)
-<input type="number" data-price="1500" value="0"></div>
-
-<div class="item">Random Relocator (500)
-<input type="number" data-price="500" value="0"></div>
-
-<div class="item">8h Shield (500)
-<input type="number" data-price="500" value="0"></div>
-
-<div class="item">24h Shield (1000)
-<input type="number" data-price="1000" value="0"></div>
-
-<div class="item">3d Shield (3500)
-<input type="number" data-price="3500" value="0"></div>
+<div class="item"><span class="name">Braveheart</span><span class="price">2000</span><input type="number" data-price="2000" value="0"></div>
+<div class="item"><span class="name">Relocator</span><span class="price">1500</span><input type="number" data-price="1500" value="0"></div>
+<div class="item"><span class="name">Random Relocator</span><span class="price">500</span><input type="number" data-price="500" value="0"></div>
+<div class="item"><span class="name">8h Shield</span><span class="price">500</span><input type="number" data-price="500" value="0"></div>
+<div class="item"><span class="name">24h Shield</span><span class="price">1000</span><input type="number" data-price="1000" value="0"></div>
+<div class="item"><span class="name">3d Shield</span><span class="price">3500</span><input type="number" data-price="3500" value="0"></div>
 
 </div>
 
+<!-- BOOST -->
+<div class="section" data-cat="boost">
+<h2>Boosts</h2>
+
+<div class="item"><span class="name">Attack Boost 20% 12h</span><span class="price">250</span><input type="number" data-price="250" value="0"></div>
+<div class="item"><span class="name">Attack Boost 20% 24h</span><span class="price">400</span><input type="number" data-price="400" value="0"></div>
+<div class="item"><span class="name">Defense Boost 20% 24h</span><span class="price">400</span><input type="number" data-price="400" value="0"></div>
+<div class="item"><span class="name">Army Size 20% 4h</span><span class="price">2400</span><input type="number" data-price="2400" value="0"></div>
+<div class="item"><span class="name">Army Size 50% 4h</span><span class="price">5000</span><input type="number" data-price="5000" value="0"></div>
+<div class="item"><span class="name">Anti‑Scout 24h</span><span class="price">600</span><input type="number" data-price="600" value="0"></div>
+
+</div>
+
+<!-- RESOURCES -->
+<div class="section" data-cat="resources">
+<h2>Resources Packs</h2>
+
+<div class="item"><span class="name">Food Pack</span><span class="price">1000</span><input type="number" data-price="1000" value="0"></div>
+<div class="item"><span class="name">Stone Pack</span><span class="price">1000</span><input type="number" data-price="1000" value="0"></div>
+<div class="item"><span class="name">Wood Pack</span><span class="price">1000</span><input type="number" data-price="1000" value="0"></div>
+<div class="item"><span class="name">Gold Pack</span><span class="price">1500</span><input type="number" data-price="1500" value="0"></div>
+
+</div>
+
+<!-- CHESTS -->
+<div class="section" data-cat="chests">
+<h2>Chests</h2>
+
+<div class="item"><span class="name">Rare Material Chest</span><span class="price">3000</span><input type="number" data-price="3000" value="0"></div>
+<div class="item"><span class="name">Epic Material Chest</span><span class="price">6000</span><input type="number" data-price="6000" value="0"></div>
+<div class="item"><span class="name">Legendary Material Chest</span><span class="price">12000</span><input type="number" data-price="12000" value="0"></div>
+
+</div>
+
+<!-- BUILDING -->
+<div class="section" data-cat="building">
+<h2>Building</h2>
+
+<div class="item"><span class="name">Building Speed Boost</span><span class="price">2500</span><input type="number" data-price="2500" value="0"></div>
+
+</div>
+
+<!-- FAMILIAR -->
+<div class="section" data-cat="familiar">
+<h2>Familiar</h2>
+
+<div class="item"><span class="name">Familiar EXP Pack</span><span class="price">2200</span><input type="number" data-price="2200" value="0"></div>
+
+</div>
+
+<!-- MONSTER HUNT -->
+<div class="section" data-cat="monster">
+<h2>Monster Hunt</h2>
+
+<div class="item"><span class="name">Energy Pack 1000</span><span class="price">1000</span><input type="number" data-price="1000" value="0"></div>
+<div class="item"><span class="name">Energy Pack 5000</span><span class="price">4000</span><input type="number" data-price="4000" value="0"></div>
+
+</div>
+
+<!-- SELL ACCOUNT -->
 <div class="section">
 <h2>Sell Account</h2>
-<input type="text" id="accountDetails" placeholder="Account details here">
+<input type="text" id="accountDetails" placeholder="Describe account for sale">
 </div>
-
-<div class="spacer"></div>
 
 </div>
 
 <div class="total-box">
-
-<div>
 Total Gems: <span id="total">0</span>
-</div>
-
-<div>
 <select id="seller">
-<option value="51950501387">Seller 1</option>
-<option value="573002560262">Seller 2</option>
+<option value="51950501387">+51 950 501 387</option>
+<option value="5491167662445">+54 9 11 6766 2445</option>
+<option value="584245125670">+58 424 5125670</option>
+<option value="584121935238">+58 412 1935238</option>
+<option value="51955121605">+51 955 121 605</option>
+<option value="5493865820180">+54 9 3865 820180</option>
+<option value="573002560262">+57 300 2560262</option>
 </select>
-
 <button onclick="sendOrder()">Send Order</button>
-</div>
-
 </div>
 
 <script>
@@ -201,78 +251,47 @@ const inputs=document.querySelectorAll("input[type='number']");
 const totalDisplay=document.getElementById("total");
 const search=document.getElementById("search");
 const filter=document.getElementById("filter");
-const items=document.querySelectorAll(".item");
-const sections=document.querySelectorAll(".section");
+const itemElems=document.querySelectorAll(".item");
+const sections=document.querySelectorAll(".section[data-cat]");
 
 inputs.forEach(i=>i.addEventListener("input",calculate));
 
 function calculate(){
 let total=0;
-inputs.forEach(i=>{
-const price=parseInt(i.dataset.price);
-const qty=parseInt(i.value)||0;
-total+=price*qty;
-});
-animateTotal(total);
-}
-
-function animateTotal(newTotal){
-let start=parseInt(totalDisplay.textContent.replace(/,/g,''))||0;
-let increment=(newTotal-start)/20;
-let step=0;
-let interval=setInterval(()=>{
-step++;
-start+=increment;
-if(step>=20){
-totalDisplay.textContent=newTotal.toLocaleString();
-clearInterval(interval);
-}else{
-totalDisplay.textContent=Math.floor(start).toLocaleString();
-}
-},20);
+inputs.forEach(i=>{total+=i.value*parseInt(i.dataset-price);});
+totalDisplay.textContent=total.toLocaleString();
 }
 
 search.addEventListener("input",()=>{
 const term=search.value.toLowerCase();
-items.forEach(item=>{
-item.style.display=item.textContent.toLowerCase().includes(term)?"flex":"none";
+itemElems.forEach(item=>{
+item.style.display=item.innerText.toLowerCase().includes(term)?"flex":"none";
 });
 });
 
 filter.addEventListener("change",()=>{
-const value=filter.value;
+const val=filter.value;
 sections.forEach(sec=>{
-if(value==="all"||sec.dataset.category===value){
-sec.style.display="block";
-}else{
-sec.style.display="none";
-}
+sec.style.display=(val==="all"||sec.dataset-cat===val)?"block":"none";
 });
 });
 
 function sendOrder(){
-let message="LAST STORE ORDER:%0A%0A";
 let total=0;
-
+let msg="LAST STORE ORDER:%0A%0A";
 inputs.forEach(i=>{
 const qty=parseInt(i.value)||0;
 if(qty>0){
-const item=i.parentElement.childNodes[0].textContent.trim();
-const price=parseInt(i.dataset.price);
-total+=price*qty;
-message+=item+" x"+qty+"%0A";
+const name=i.parentElement.querySelector(".name").innerText;
+total+=i.value*parseInt(i.dataset-price);
+msg+=name+" x"+qty+"%0A";
 }
 });
-
 const account=document.getElementById("accountDetails").value;
-if(account){
-message+="%0AAccount Sale:%0A"+account+"%0A";
-}
-
-message+="%0ATotal Gems: "+total.toLocaleString();
+if(account){msg+="%0AAccount Sale:%0A"+account+"%0A";}
+msg+="%0ATotal Gems: "+total.toLocaleString();
 const seller=document.getElementById("seller").value;
-
-window.location.href="https://wa.me/"+seller+"?text="+message;
+window.location.href="https://wa.me/"+seller+"?text="+msg;
 }
 </script>
 
