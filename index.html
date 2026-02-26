@@ -3,58 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Last Store | Accelerators</title>
+<title>Last Store | Professional Gem Calculator</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Orbitron',sans-serif;
-}
-
-body{
-background:#0d1117;
-color:#fff;
-overflow-x:hidden;
-}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0d1117;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden}
 
 /* NAVBAR */
 nav{
+position:fixed;
+top:0;
 width:100%;
-padding:20px 5%;
+background:#111827;
 display:flex;
 justify-content:space-between;
 align-items:center;
-background:#111827;
-border-bottom:1px solid #1f2937;
-position:fixed;
-top:0;
+padding:15px 5%;
 z-index:1000;
+border-bottom:1px solid #1f2937;
 }
 
-nav img{
-height:60px;
-}
+/* SVG LOGO */
+.logo svg{height:55px}
 
-nav ul{
-display:flex;
-gap:30px;
-list-style:none;
-}
-
-nav ul li a{
-color:#00f0ff;
-text-decoration:none;
-font-weight:600;
-transition:0.3s;
-}
-
-nav ul li a:hover{
-color:#fff;
-}
+nav ul{display:flex;gap:25px;list-style:none}
+nav a{color:#00f0ff;text-decoration:none;font-weight:600;transition:.3s}
+nav a:hover{color:#fff}
 
 /* HERO */
 .hero{
@@ -64,99 +40,107 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-padding:0 20px;
 background:linear-gradient(to bottom,#0d1117,#111827);
+padding:20px;
 }
-
 .hero h1{
+font-family:'Orbitron',sans-serif;
 font-size:48px;
-color:#00f0ff;
+color:#FFD700;
 margin-bottom:20px;
 }
-
-.hero p{
-font-size:18px;
-color:#ccc;
-margin-bottom:40px;
-}
-
+.hero p{color:#ccc;margin-bottom:30px}
 .hero button{
-padding:15px 40px;
-font-size:16px;
+padding:14px 35px;
+background:#FFD700;
 border:none;
 border-radius:30px;
-background:#00f0ff;
-color:#000;
+font-weight:bold;
 cursor:pointer;
-transition:0.3s;
 }
-
-.hero button:hover{
-background:#00c8d7;
-}
+.hero button:hover{background:#e6c200}
 
 /* SECTION */
-section{
-padding:100px 5%;
-}
-
+section{padding:100px 5%}
 .section-title{
 text-align:center;
-font-size:36px;
-margin-bottom:60px;
-color:#00f0ff;
+font-size:34px;
+color:#FFD700;
+margin-bottom:40px;
+font-family:'Orbitron',sans-serif;
 }
 
-/* CARDS */
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:40px;
-}
-
-.card{
-background:#111827;
-padding:40px;
-border-radius:20px;
-text-align:center;
-border:1px solid #1f2937;
-transition:0.4s;
-}
-
-.card:hover{
-transform:translateY(-10px);
-box-shadow:0 0 25px #00f0ff50;
-}
-
-.card h3{
-margin-bottom:20px;
-color:#00f0ff;
-}
-
-.card p{
-margin-bottom:20px;
-color:#aaa;
-}
-
-.card input{
+/* TABLE */
+.table-container{overflow-x:auto}
+table{
 width:100%;
-padding:12px;
-margin-bottom:20px;
+border-collapse:collapse;
+background:#111827;
+border-radius:12px;
+overflow:hidden;
+}
+th,td{
+padding:15px;
+border-bottom:1px solid #1f2937;
+text-align:center;
+}
+th{
+background:#1f2937;
+color:#FFD700;
+}
+input[type=number]{
+width:90px;
+padding:8px;
+border-radius:6px;
 border:none;
-border-radius:10px;
 text-align:center;
 }
 
-.card button{
-padding:12px 25px;
-border:none;
-border-radius:20px;
-background:#00f0ff;
-cursor:pointer;
+/* ORDER */
+.order-box{
+background:#111827;
+padding:25px;
+margin-top:30px;
+border-radius:12px;
+border:1px solid #1f2937;
+}
+.order-box h3{color:#FFD700;margin-bottom:15px}
+.total{
+font-size:22px;
+margin-top:10px;
+}
+.total span{
+color:#00ff99;
 font-weight:bold;
 }
 
-.result{
+/* GEM CALC */
+.gem-box{
+background:#111827;
+padding:25px;
+border-radius:12px;
+border:1px solid #1f2937;
+max-width:500px;
+margin:auto;
+text-align:center;
+}
+.gem-box input{
+padding:10px;
+width:100%;
+margin-bottom:15px;
+border-radius:6px;
+border:none;
+text-align:center;
+}
+.gem-box button{
+padding:12px 25px;
+border:none;
+border-radius:20px;
+background:#FFD700;
+font-weight:bold;
+cursor:pointer;
+}
+.gem-result{
 margin-top:15px;
 font-size:18px;
 color:#00ff99;
@@ -171,79 +155,90 @@ border-top:1px solid #1f2937;
 color:#888;
 }
 
-/* RESPONSIVE */
 @media(max-width:768px){
-.hero h1{
-font-size:32px;
-}
+.hero h1{font-size:32px}
 }
 </style>
 </head>
 <body>
 
 <nav>
-<img src="logo.png" alt="Last Store Logo">
+<div class="logo">
+<svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="0%" stop-color="#FFD700"/>
+<stop offset="50%" stop-color="#FFA500"/>
+<stop offset="100%" stop-color="#FFD700"/>
+</linearGradient>
+</defs>
+<circle cx="100" cy="100" r="70" fill="url(#gold)" opacity="0.9"/>
+<circle cx="100" cy="100" r="50" fill="#0d1117"/>
+<text x="70" y="115" font-size="60" font-weight="900" fill="url(#gold)" font-family="Orbitron">LS</text>
+<text x="200" y="110" font-size="55" font-weight="900" fill="url(#gold)" font-family="Orbitron">
+LAST STORE
+</text>
+</svg>
+</div>
+
 <ul>
-<li><a href="#home">Home</a></li>
 <li><a href="#accelerators">Accelerators</a></li>
-<li><a href="#calculator">Calculator</a></li>
+<li><a href="#gems">Gem Calculator</a></li>
 </ul>
 </nav>
 
-<div class="hero" id="home">
-<h1>LAST STORE ACCELERATORS</h1>
-<p>Professional Speed Boost Calculations for Elite Players</p>
-<button onclick="scrollToSection()">Explore Now</button>
+<div class="hero">
+<h1>Professional Gem Calculator</h1>
+<p>Elite Accelerator & Gem Estimation Tool</p>
+<button onclick="document.getElementById('accelerators').scrollIntoView({behavior:'smooth'})">
+Start Now
+</button>
 </div>
 
 <section id="accelerators">
 <h2 class="section-title">Accelerators</h2>
-<div class="cards">
 
-<div class="card">
-<h3>15 Hours Accelerator</h3>
-<p>Boost your progress with precision timing.</p>
+<div class="table-container">
+<table>
+<tr>
+<th>Item</th>
+<th>Gem Cost</th>
+<th>Quantity</th>
+</tr>
+<tr>
+<td>15 Hours</td>
+<td>1,000</td>
+<td><input type="number" id="a15"></td>
+</tr>
+<tr>
+<td>24 Hours</td>
+<td>1,500</td>
+<td><input type="number" id="a24"></td>
+</tr>
+<tr>
+<td>3 Days</td>
+<td>4,400</td>
+<td><input type="number" id="a3d"></td>
+</tr>
+</table>
 </div>
 
-<div class="card">
-<h3>24 Hours Accelerator</h3>
-<p>Full day acceleration for maximum efficiency.</p>
+<div class="order-box">
+<h3>Order Summary</h3>
+<div id="summary"></div>
+<div class="total">
+Total Gems: <span id="total">0</span>
 </div>
-
-<div class="card">
-<h3>3 Days Accelerator</h3>
-<p>Ultimate power boost for elite upgrades.</p>
-</div>
-
 </div>
 </section>
 
-<section id="calculator">
-<h2 class="section-title">Accelerator Calculator</h2>
+<section id="gems">
+<h2 class="section-title">Gem Calculator</h2>
 
-<div class="cards">
-
-<div class="card">
-<h3>15 Hours</h3>
-<input type="number" id="input15" placeholder="Enter quantity">
-<button onclick="calc(15,'input15','res15')">Calculate</button>
-<div id="res15" class="result"></div>
-</div>
-
-<div class="card">
-<h3>24 Hours</h3>
-<input type="number" id="input24" placeholder="Enter quantity">
-<button onclick="calc(24,'input24','res24')">Calculate</button>
-<div id="res24" class="result"></div>
-</div>
-
-<div class="card">
-<h3>3 Days</h3>
-<input type="number" id="input72" placeholder="Enter quantity">
-<button onclick="calc(72,'input72','res72')">Calculate</button>
-<div id="res72" class="result"></div>
-</div>
-
+<div class="gem-box">
+<input type="number" id="gemInput" placeholder="Enter gem amount">
+<button onclick="calculateGems()">Calculate</button>
+<div id="gemResult" class="gem-result"></div>
 </div>
 </section>
 
@@ -252,18 +247,37 @@ font-size:32px;
 </footer>
 
 <script>
-function scrollToSection(){
-document.getElementById("accelerators").scrollIntoView({behavior:"smooth"});
+const prices={a15:1000,a24:1500,a3d:4400};
+
+function formatNumber(num){
+return Number(num).toLocaleString("en-US");
 }
 
-function calc(hours,inputId,resultId){
-let qty=document.getElementById(inputId).value;
-if(qty<=0){
-document.getElementById(resultId).innerHTML="Enter valid number";
-return;
+function calculate(){
+let total=0;
+let summary="";
+for(let id in prices){
+let qty=parseInt(document.getElementById(id).value)||0;
+if(qty>0){
+let subtotal=qty*prices[id];
+total+=subtotal;
+summary+=qty+" x "+id+" = "+formatNumber(subtotal)+" gems<br>";
 }
-let total=qty*hours;
-document.getElementById(resultId).innerHTML="Total Hours: "+total+"h";
+}
+document.getElementById("total").innerText=formatNumber(total);
+document.getElementById("summary").innerHTML=summary;
+}
+
+document.querySelectorAll("input[type=number]").forEach(input=>{
+input.addEventListener("input",calculate);
+});
+
+function calculateGems(){
+let gems=document.getElementById("gemInput").value;
+if(gems<=0)return;
+let value=gems*0.002;
+document.getElementById("gemResult").innerHTML=
+"Gems: "+formatNumber(gems)+"<br>Estimated Value: $"+formatNumber(value.toFixed(2));
 }
 </script>
 
