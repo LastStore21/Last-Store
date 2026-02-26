@@ -3,213 +3,276 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Last Store - Gem Calculator</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<title>Last Store Elite</title>
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
-body{background:#0a192f;color:white;}
-header{background:#112240;padding:20px 40px;border-bottom:2px solid #1e3a8a;display:flex;align-items:center;}
-.logo svg{height:55px;}
-.container{max-width:1200px;margin:auto;padding:30px;}
-.section{background:#112240;margin-bottom:15px;padding:0;border-radius:10px;box-shadow:0 0 15px rgba(0,0,0,0.5);}
-.section h2{cursor:pointer;padding:15px;background:#1e3a8a;border-radius:10px;font-family:Orbitron;color:#60a5fa;margin:0;display:flex;align-items:center;}
-.section h2 img{height:25px;width:25px;margin-right:10px;}
-.items{display:none;padding:15px;}
-.item{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;background:#0f172a;padding:10px 15px;border-radius:8px;}
-.item input{width:80px;padding:5px;background:#0a192f;border:1px solid #1e3a8a;color:white;text-align:center;border-radius:5px;}
-.total-box{background:#1e3a8a;padding:20px;border-radius:10px;text-align:center;font-size:22px;font-weight:600;margin-top:20px;}
-select,button{width:100%;padding:12px;margin-top:12px;border-radius:10px;border:none;font-size:15px;}
-select{background:#0f172a;color:white;}
-button{background:#3b82f6;color:white;font-weight:700;cursor:pointer;transition:0.3s;}
-button:hover{background:#2563eb;}
-footer{text-align:center;padding:20px;color:#93c5fd;margin-top:30px;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif;}
+
+body{
+background:linear-gradient(135deg,#0a1f44,#07142c);
+color:white;
+}
+
+header{
+text-align:center;
+padding:40px 20px;
+font-size:48px;
+font-weight:900;
+background:linear-gradient(90deg,#00aaff,#005eff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.container{max-width:1200px;margin:auto;padding:20px;}
+
+.top-controls{
+display:flex;
+flex-wrap:wrap;
+gap:15px;
+margin-bottom:20px;
+}
+
+input[type="text"], select{
+padding:10px;
+border-radius:8px;
+border:none;
+}
+
+.section{
+margin-bottom:30px;
+}
+
+.section h2{
+margin-bottom:15px;
+border-bottom:2px solid #00aaff;
+padding-bottom:8px;
+}
+
+.item{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#0f2d66;
+padding:12px;
+border-radius:10px;
+margin-bottom:10px;
+transition:.2s;
+}
+
+.item:hover{
+transform:scale(1.02);
+background:#143b85;
+}
+
+.item input{
+width:70px;
+padding:6px;
+border-radius:6px;
+border:none;
+text-align:center;
+}
+
+.total-box{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#081833;
+padding:20px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 -5px 20px rgba(0,0,0,.6);
+}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:8px;
+background:linear-gradient(90deg,#00aaff,#005eff);
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+.spacer{height:120px;}
 </style>
 </head>
+
 <body>
 
-<header>
-<div class="logo">
-<svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
-<defs>
-<linearGradient id="bluegrad" x1="0%" y1="0%" x2="100%" y2="0%">
-<stop offset="0%" stop-color="#3b82f6"/>
-<stop offset="50%" stop-color="#60a5fa"/>
-<stop offset="100%" stop-color="#3b82f6"/>
-</linearGradient>
-</defs>
-<circle cx="100" cy="100" r="70" fill="url(#bluegrad)" opacity="0.9"/>
-<circle cx="100" cy="100" r="50" fill="#0a192f"/>
-<text x="70" y="115" font-size="60" font-weight="800" fill="url(#bluegrad)" font-family="Orbitron">LS</text>
-<text x="200" y="110" font-size="55" font-weight="800" fill="url(#bluegrad)" font-family="Orbitron">LAST STORE</text>
-</svg>
-</div>
-</header>
+<header>LAST STORE</header>
 
 <div class="container">
 
-<!-- Speed Ups -->
-<div class="section">
-<h2><img src="https://img.icons8.com/ios-filled/50/ffffff/fast-forward.png" alt="Speed Icon">Speed Ups</h2>
-<div class="items">
-<><input type="number" min="0" value="0" data-price="150"></div>
-<div class="item"><span>Speed 60 min</span><input type="number" min="0" value="0" data-price="130"></div>
-<div class="item"><span>Speed 3 hours</span><input type="number" min="0" value="0" data-price="300"></div>
-<div class="item"><span>Speed 8 hours</span><input type="number" min="0" value="0" data-price="650"></div>
-<div class="item"><span>Speed 15 hours</span><input type="number" min="0" value="0" data-price="1000"></div>
-<div class="item"><span>Speed 24 hours</span><input type="number" min="0" value="0" data-price="1500"></div>
-<div class="item"><span>Speed 3 days</span><input type="number" min="0" value="0" data-price="4400"></div>
-<div class="item"><span>Speed 7 days</span><input type="number" min="0" value="0" data-price="10000"></div>
-<div class="item"><span>Speed 30 days</span><input type="number" min="0" value="0" data-price="40000"></div>
-</div>
+<div class="top-controls">
+<input type="text" id="search" placeholder="Search item...">
+<select id="filter">
+<option value="all">All Categories</option>
+<option value="speed">Speed Ups</option>
+<option value="combat">Combat</option>
+</select>
 </div>
 
-<!-- Shields -->
-<div class="section">
-<h2><img src="https://img.icons8.com/ios-filled/50/ffffff/shield.png" alt="Shield Icon">Shields</h2>
-<div class="items">
-<div class="item"><span>Shield 8h</span><input type="number" min="0" value="0" data-price="500"></div>
-<div class="item"><span>Shield 24h</span><input type="number" min="0" value="0" data-price="1000"></div>
-<div class="item"><span>Shield 3d</span><input type="number" min="0" value="0" data-price="3500"></div>
-<div class="item"><span>Shield 7d</span><input type="number" min="0" value="0" data-price="10000"></div>
-<div class="item"><span>Shield 14d</span><input type="number" min="0" value="0" data-price="25000"></div>
-</div>
+<div class="section" data-category="speed">
+<h2>Speed Ups</h2>
+
+<div class="item">1 Hour (130)
+<input type="number" data-price="130" value="0"></div>
+
+<div class="item">3 Hours (300)
+<input type="number" data-price="300" value="0"></div>
+
+<div class="item">8 Hours (650)
+<input type="number" data-price="650" value="0"></div>
+
+<div class="item">15 Hours (1000)
+<input type="number" data-price="1000" value="0"></div>
+
+<div class="item">24 Hours (1500)
+<input type="number" data-price="1500" value="0"></div>
+
+<div class="item">3 Days (4400)
+<input type="number" data-price="4400" value="0"></div>
+
+<div class="item">7 Days (10000)
+<input type="number" data-price="10000" value="0"></div>
+
+<div class="item">30 Days (40000)
+<input type="number" data-price="40000" value="0"></div>
+
 </div>
 
-<!-- Relocators -->
-<div class="section">
-<h2><img src="https://img.icons8.com/ios-filled/50/ffffff/marker.png" alt="Relocator Icon">Relocators</h2>
-<div class="items">
-<div class="item"><span>Random Relocator</span><input type="number" min="0" value="0" data-price="500"></div>
-<div class="item"><span>Relocator</span><input type="number" min="0" value="0" data-price="1500"></div>
-<div class="item"><span>Guild Fest Relocator</span><input type="number" min="0" value="0" data-price="6000"></div>
-</div>
+<div class="section" data-category="combat">
+<h2>Combat</h2>
+
+<div class="item">Braveheart (2000)
+<input type="number" data-price="2000" value="0"></div>
+
+<div class="item">Relocator (1500)
+<input type="number" data-price="1500" value="0"></div>
+
+<div class="item">Random Relocator (500)
+<input type="number" data-price="500" value="0"></div>
+
+<div class="item">8h Shield (500)
+<input type="number" data-price="500" value="0"></div>
+
+<div class="item">24h Shield (1000)
+<input type="number" data-price="1000" value="0"></div>
+
+<div class="item">3d Shield (3500)
+<input type="number" data-price="3500" value="0"></div>
+
 </div>
 
-<!-- Boosts -->
 <div class="section">
-<h2><img src="https://img.icons8.com/ios-filled/50/ffffff/rocket.png" alt="Boost Icon">Boosts</h2>
-<div class="items">
-<div class="item"><span>Attack 20% 12h</span><input type="number" min="0" value="0" data-price="1000"></div>
-<div class="item"><span>Attack 20% 24h</span><input type="number" min="0" value="0" data-price="1500"></div>
-<div class="item"><span>Defense 20% 24h</span><input type="number" min="0" value="0" data-price="1500"></div>
-<div class="item"><span>HP 20% 24h</span><input type="number" min="0" value="0" data-price="1500"></div>
-<div class="item"><span>Army Size 20% 4h</span><input type="number" min="0" value="0" data-price="2400"></div>
-<div class="item"><span>Army Size 50% 4h</span><input type="number" min="0" value="0" data-price="5000"></div>
-<div class="item"><span>Anti‑Scout 24h</span><input type="number" min="0" value="0" data-price="600"></div>
-<div class="item"><span>Anti‑Scout 3d</span><input type="number" min="0" value="0" data-price="1200"></div>
-<div class="item"><span>Anti‑Scout 7d</span><input type="number" min="0" value="0" data-price="3000"></div>
-</div>
+<h2>Sell Account</h2>
+<input type="text" id="accountDetails" placeholder="Account details here">
 </div>
 
-<!-- Resources -->
-<div class="section">
-<h2><img src="https://img.icons8.com/ios-filled/50/ffffff/treasure-chest.png" alt="Resources Icon">Resources</h2>
-<div class="items">
-<div class="item"><span>Food Pack</span><input type="number" min="0" value="0" data-price="1000"></div>
-<div class="item"><span>Stone Pack</span><input type="number" min="0" value="0" data-price="1000"></div>
-<div class="item"><span>Wood Pack</span><input type="number" min="0" value="0" data-price="1000"></div>
-<div class="item"><span>Gold Pack</span><input type="number" min="0" value="0" data-price="1500"></div>
-</div>
-</div>
+<div class="spacer"></div>
 
-<!-- Chests -->
-<div class="section">
-<h2><img src="https://img.icons8.com/ios-filled/50/ffffff/gift.png" alt="Chests Icon">Chests</h2>
-<div class="items">
-<div class="item"><span>Rare Material Chest</span><input type="number" min="0" value="0" data-price="3000"></div>
-<div class="item"><span>Epic Material Chest</span><input type="number" min="0" value="0" data-price="6000"></div>
-<div class="item"><span>Legendary Material Chest</span><input type="number" min="0" value="0" data-price="12000"></div>
-</div>
-</div>
-
-<!-- Building -->
-<div class="section">
-<h2><img src="https://img.icons8.com/ios-filled/50/ffffff/building.png" alt="Building Icon">Building</h2>
-<div class="items">
-<div class="item"><span>Building Upgrade 1</span><input type="number" min="0" value="0" data-price="2000"></div>
-<div class="item"><span>Building Upgrade 2</span><input type="number" min="0" value="0" data-price="5000"></div>
-<div class="item"><span>Building Upgrade 3</span><input type="number" min="0" value="0" data-price="10000"></div>
-</div>
-</div>
-
-<!-- Familiar -->
-<div class="section">
-<h2><img src="https://img.icons8.com/ios-filled/50/ffffff/paw-print.png" alt="Familiar Icon">Familiar</h2>
-<div class="items">
-<div class="item"><span>Familiar Summon</span><input type="number" min="0" value="0" data-price="1500"></div>
-<div class="item"><span>Familiar Upgrade</span><input type="number" min="0" value="0" data-price="3000"></div>
-</div>
-</div>
-
-<!-- Monster Hunt -->
-<div class="section">
-<h2><img src="https://img.icons8.com/ios-filled/50/ffffff/dragon.png" alt="Monster Hunt Icon">Monster Hunt</h2>
-<div class="items">
-<div class="item"><span>Hunt 1</span><input type="number" min="0" value="0" data-price="1000"></div>
-<div class="item"><span>Hunt 2</span><input type="number" min="0" value="0" data-price="2500"></div>
-<div class="item"><span>Hunt 3</span><input type="number" min="0" value="0" data-price="5000"></div>
-</div>
 </div>
 
 <div class="total-box">
+
+<div>
 Total Gems: <span id="total">0</span>
 </div>
 
+<div>
 <select id="seller">
-<option value="51950501387">+51 950 501 387</option>
-<option value="5491167662445">+54 9 11 6766 2445</option>
-<option value="584245125670">+58 424 512 5670</option>
-<option value="584121935238">+58 412 193 5238</option>
-<option value="51955121605">+51 955 121 605</option>
-<option value="5493865820180">+54 9 3865 82 0180</option>
-<option value="573002560262">+57 300 256 0262</option>
+<option value="51950501387">Seller 1</option>
+<option value="573002560262">Seller 2</option>
 </select>
 
-<button onclick="sendOrder()">Send Order via WhatsApp</button>
+<button onclick="sendOrder()">Send Order</button>
+</div>
 
-<footer>
-© 2026 Last Store
-</footer>
+</div>
 
 <script>
-// Accordion toggle
-document.querySelectorAll('.section h2').forEach(header=>{
-    header.addEventListener('click',()=>{
-        const items=header.nextElementSibling;
-        items.style.display = items.style.display==='block'?'none':'block';
-    });
-});
+const inputs=document.querySelectorAll("input[type='number']");
+const totalDisplay=document.getElementById("total");
+const search=document.getElementById("search");
+const filter=document.getElementById("filter");
+const items=document.querySelectorAll(".item");
+const sections=document.querySelectorAll(".section");
 
-const inputs=document.querySelectorAll('input');
-const totalDisplay=document.getElementById('total');
-
-inputs.forEach(i=>i.addEventListener('input',calculate));
+inputs.forEach(i=>i.addEventListener("input",calculate));
 
 function calculate(){
-    let total=0;
-    inputs.forEach(i=>{total+=i.value*parseInt(i.dataset.price)});
-    totalDisplay.innerText=total.toLocaleString();
+let total=0;
+inputs.forEach(i=>{
+const price=parseInt(i.dataset.price);
+const qty=parseInt(i.value)||0;
+total+=price*qty;
+});
+animateTotal(total);
 }
 
+function animateTotal(newTotal){
+let start=parseInt(totalDisplay.textContent.replace(/,/g,''))||0;
+let increment=(newTotal-start)/20;
+let step=0;
+let interval=setInterval(()=>{
+step++;
+start+=increment;
+if(step>=20){
+totalDisplay.textContent=newTotal.toLocaleString();
+clearInterval(interval);
+}else{
+totalDisplay.textContent=Math.floor(start).toLocaleString();
+}
+},20);
+}
+
+search.addEventListener("input",()=>{
+const term=search.value.toLowerCase();
+items.forEach(item=>{
+item.style.display=item.textContent.toLowerCase().includes(term)?"flex":"none";
+});
+});
+
+filter.addEventListener("change",()=>{
+const value=filter.value;
+sections.forEach(sec=>{
+if(value==="all"||sec.dataset.category===value){
+sec.style.display="block";
+}else{
+sec.style.display="none";
+}
+});
+});
+
 function sendOrder(){
-    let total=0;
-    let message="🔥 LAST STORE ORDER 🔥%0A";
+let message="LAST STORE ORDER:%0A%0A";
+let total=0;
 
-    inputs.forEach(i=>{
-        if(i.value>0){
-            const name=i.parentElement.querySelector('span').innerText;
-            message+="- "+i.value+" x "+name+"%0A";
-            total+=i.value*parseInt(i.dataset.price);
-        }
-    });
+inputs.forEach(i=>{
+const qty=parseInt(i.value)||0;
+if(qty>0){
+const item=i.parentElement.childNodes[0].textContent.trim();
+const price=parseInt(i.dataset.price);
+total+=price*qty;
+message+=item+" x"+qty+"%0A";
+}
+});
 
-    if(total===0){alert("Select at least one item.");return;}
+const account=document.getElementById("accountDetails").value;
+if(account){
+message+="%0AAccount Sale:%0A"+account+"%0A";
+}
 
-    message+="%0ATotal Gems: "+total.toLocaleString();
+message+="%0ATotal Gems: "+total.toLocaleString();
+const seller=document.getElementById("seller").value;
 
-    let selected=document.getElementById('seller').value;
-
-    window.location.href="https://wa.me/"+selected+"?text="+message;
+window.location.href="https://wa.me/"+seller+"?text="+message;
 }
 </script>
 
