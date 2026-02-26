@@ -27,6 +27,7 @@ header{background:#03102a;padding:20px;text-align:center;font-size:36px;font-wei
 .total{font-size:20px;font-weight:800;color:#00e1ff;}
 .total-bar select{padding:10px;border-radius:8px;border:none;}
 .send{background:linear-gradient(90deg,#00c3ff,#005eff);padding:12px 30px;border:none;border-radius:10px;color:white;font-weight:bold;cursor:pointer;}
+img.preview-img{width:80px;border-radius:8px;}
 </style>
 </head>
 <body>
@@ -72,103 +73,60 @@ header{background:#03102a;padding:20px;text-align:center;font-size:36px;font-wei
 
 <script>
 // ===== TODOS LOS ARTÍCULOS =====
-const data = {
+const data={
 speed:[
-{name:"1 Hour Speed Up",price:130},
-{name:"3 Hour Speed Up",price:300},
-{name:"8 Hour Speed Up",price:650},
-{name:"15 Hour Speed Up",price:1000},
-{name:"24 Hour Speed Up",price:1500},
-{name:"3 Day Speed Up",price:4400},
-{name:"7 Day Speed Up",price:10000},
-{name:"30 Day Speed Up",price:40000}
+{name:"1 Hour Speed Up",price:130},{name:"3 Hour Speed Up",price:300},{name:"8 Hour Speed Up",price:650},{name:"15 Hour Speed Up",price:1000},{name:"24 Hour Speed Up",price:1500},{name:"3 Day Speed Up",price:4400},{name:"7 Day Speed Up",price:10000},{name:"30 Day Speed Up",price:40000}
 ],
 combat:[
-{name:"Relocator",price:1500},
-{name:"Random Relocator",price:500},
-{name:"24h Shield",price:1000},
-{name:"3d Shield",price:3500},
-{name:"7d Shield",price:10000},
-{name:"Braveheart",price:2000},
-{name:"Anti-Scout 24h",price:600},
-{name:"Anti-Scout 3d",price:1200},
-{name:"Anti-Scout 7d",price:3000}
+{name:"Relocator",price:1500},{name:"Random Relocator",price:500},{name:"24h Shield",price:1000},{name:"3d Shield",price:3500},{name:"7d Shield",price:10000},{name:"Braveheart",price:2000},{name:"Anti-Scout 24h",price:600},{name:"Anti-Scout 3d",price:1200},{name:"Anti-Scout 7d",price:3000}
 ],
 boost:[
-{name:"Attack Boost 20% 12h",price:250},
-{name:"Attack Boost 20% 24h",price:400},
-{name:"Defense Boost 20% 12h",price:250},
-{name:"Defense Boost 20% 24h",price:400},
-{name:"Army Size Boost 20% 4h",price:2400},
-{name:"Army Size Boost 50% 4h",price:5000},
-{name:"Winged Boots 25%",price:500},
-{name:"Winged Boots 50%",price:900},
-{name:"Talent Reset",price:1000},
-{name:"VIP Points",price:300}
+{name:"Attack Boost 20% 12h",price:250},{name:"Attack Boost 20% 24h",price:400},{name:"Defense Boost 20% 12h",price:250},{name:"Defense Boost 20% 24h",price:400},{name:"Army Size Boost 20% 4h",price:2400},{name:"Army Size Boost 50% 4h",price:5000},{name:"Winged Boots 25%",price:500},{name:"Winged Boots 50%",price:900},{name:"Talent Reset",price:1000},{name:"VIP Points",price:300}
 ],
 resources:[
-{name:"Food Pack 1M",price:10000},
-{name:"Food Pack 5M",price:45000},
-{name:"Wood Pack 1M",price:10000},
-{name:"Wood Pack 5M",price:45000},
-{name:"Stone Pack 1M",price:10000},
-{name:"Stone Pack 5M",price:45000},
-{name:"Ore Pack 1M",price:10000},
-{name:"Ore Pack 5M",price:45000},
-{name:"Gold Pack 1M",price:10000},
-{name:"Gold Pack 5M",price:45000}
+{name:"Food Pack 1M",price:10000},{name:"Food Pack 5M",price:45000},{name:"Wood Pack 1M",price:10000},{name:"Wood Pack 5M",price:45000},{name:"Stone Pack 1M",price:10000},{name:"Stone Pack 5M",price:45000},{name:"Ore Pack 1M",price:10000},{name:"Ore Pack 5M",price:45000},{name:"Gold Pack 1M",price:10000},{name:"Gold Pack 5M",price:45000}
 ],
 chest:[
-{name:"Material Chest",price:1500},
-{name:"Jewel Chest",price:6000},
-{name:"Item Chest",price:3000}
+{name:"Material Chest",price:1500},{name:"Jewel Chest",price:6000},{name:"Item Chest",price:3000}
 ],
 building:[
-{name:"Building Speed Up 1h",price:130},
-{name:"Building Speed Up 3h",price:300},
-{name:"Building Speed Up 8h",price:650}
+{name:"Building Speed Up 1h",price:130},{name:"Building Speed Up 3h",price:300},{name:"Building Speed Up 8h",price:650}
 ],
 familiar:[
-{name:"Familiar Energy 5000",price:1125},
-{name:"Familiar Energy 10000",price:2000},
-{name:"Familiar Energy 20000",price:3500},
-{name:"Familiar Energy 50000",price:7500}
+{name:"Familiar Energy 5000",price:1125},{name:"Familiar Energy 10000",price:2000},{name:"Familiar Energy 20000",price:3500},{name:"Familiar Energy 50000",price:7500}
 ],
 monster:[
-{name:"Monster Hunt Energy 5000",price:1125},
-{name:"Monster Hunt Energy 10000",price:2000},
-{name:"Monster Hunt Energy 20000",price:3500},
-{name:"Monster Hunt Energy 50000",price:7500}
-};
+{name:"Monster Hunt Energy 5000",price:1125},{name:"Monster Hunt Energy 10000",price:2000},{name:"Monster Hunt Energy 20000",price:3500},{name:"Monster Hunt Energy 50000",price:7500}
+];
 
 // ===== VARIABLES =====
-let cart = {};
-const imageInput = document.getElementById("images");
-const preview = document.getElementById("preview");
+let cart={};
+const imageInput=document.getElementById("images");
+const preview=document.getElementById("preview");
 
-// ===== FORMATO NUMÉRICO =====
+// ===== FORMATO =====
 function format(n){return n.toLocaleString();}
 
-// ===== RENDER ITEMS =====
+// ===== RENDER =====
 function render(){
-    const container = document.getElementById("items");
-    container.innerHTML = "";
+    const container=document.getElementById("items");
+    container.innerHTML="";
     for(const cat in data){
-        const section = document.createElement("div");
-        section.className = "section";
-        section.dataset.cat = cat;
-        section.innerHTML = `<h2>${cat.toUpperCase()}</h2><div class="grid"></div>`;
+        const section=document.createElement("div");
+        section.className="section";
+        section.dataset.cat=cat;
+        section.innerHTML=`<h2>${cat.toUpperCase()}</h2><div class="grid"></div>`;
         data[cat].forEach(item=>{
-            const safeId = item.name.replace(/[^a-zA-Z0-9]/g,"_");
-            const card = document.createElement("div");
-            card.className = "card";
-            card.innerHTML = `
+            const id=item.name.replace(/[^a-zA-Z0-9]/g,"_");
+            const card=document.createElement("div");
+            card.className="card";
+            card.innerHTML=`
                 <h3>${item.name}</h3>
                 <div class="price">${format(item.price)} Gems</div>
                 <div class="qty-control">
-                    <button onclick="update('${safeId}',-1)">-</button>
-                    <div class="qty" id="${safeId}">0</div>
-                    <button onclick="update('${safeId}',1)">+</button>
+                    <button onclick="update('${id}',-1)">-</button>
+                    <div class="qty" id="${id}">0</div>
+                    <button onclick="update('${id}',1)">+</button>
                 </div>
             `;
             section.querySelector(".grid").appendChild(card);
@@ -177,65 +135,64 @@ function render(){
     }
 }
 
-// ===== ACTUALIZAR CANTIDAD =====
-function update(id, change){
+// ===== UPDATE =====
+function update(id,change){
     if(!cart[id]) cart[id]=0;
     cart[id]+=change;
     if(cart[id]<0) cart[id]=0;
-    document.getElementById(id).innerText = cart[id];
+    document.getElementById(id).innerText=cart[id];
     updateSummary();
 }
 
-// ===== RESUMEN =====
+// ===== SUMMARY =====
 function updateSummary(){
-    let total=0, summary="";
+    let total=0,summary="";
     for(const cat in data){
         data[cat].forEach(item=>{
             const id=item.name.replace(/[^a-zA-Z0-9]/g,"_");
             if(cart[id]>0){
-                let subtotal = cart[id]*item.price;
+                let subtotal=cart[id]*item.price;
                 total+=subtotal;
                 summary+=`<div class="summary-item">${item.name} x${cart[id]} = ${format(subtotal)}</div>`;
             }
         });
     }
-    document.getElementById("summaryList").innerHTML = summary;
-    document.getElementById("total").innerText = format(total);
+    document.getElementById("summaryList").innerHTML=summary;
+    document.getElementById("total").innerText=format(total);
 }
 
-// ===== BUSCADOR =====
-document.getElementById("search").addEventListener("input", function(){
+// ===== SEARCH =====
+document.getElementById("search").addEventListener("input",function(){
     const value=this.value.toLowerCase();
     document.querySelectorAll(".card").forEach(card=>{
-        card.style.display = card.innerText.toLowerCase().includes(value)?"block":"none";
+        card.style.display=card.innerText.toLowerCase().includes(value)?"block":"none";
     });
 });
 
-// ===== FILTRO CATEGORÍA =====
-document.getElementById("filter").addEventListener("change", function(){
+// ===== FILTER =====
+document.getElementById("filter").addEventListener("change",function(){
     const value=this.value;
     document.querySelectorAll(".section").forEach(sec=>{
-        sec.style.display = (value==="all" || sec.dataset.cat===value)?"block":"none";
+        sec.style.display=(value==="all"||sec.dataset.cat===value)?"block":"none";
     });
 });
 
-// ===== PREVIEW IMÁGENES =====
-imageInput.addEventListener("change", function(){
+// ===== IMAGE PREVIEW =====
+imageInput.addEventListener("change",function(){
     preview.innerHTML="";
     Array.from(this.files).forEach(file=>{
         const reader=new FileReader();
         reader.onload=function(e){
             const img=document.createElement("img");
             img.src=e.target.result;
-            img.style.width="80px";
-            img.style.borderRadius="8px";
+            img.className="preview-img";
             preview.appendChild(img);
         };
         reader.readAsDataURL(file);
     });
 });
 
-// ===== ENVIAR A WHATSAPP =====
+// ===== SEND WHATSAPP =====
 function sendOrder(){
     let msg="🔥 LAST STORE ORDER 🔥%0A%0A";
     let total=0;
@@ -256,7 +213,7 @@ function sendOrder(){
     window.location.href="https://wa.me/"+seller+"?text="+msg;
 }
 
-// ===== INICIAR =====
+// ===== INIT =====
 render();
 </script>
 </body>
