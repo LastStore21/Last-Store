@@ -3,254 +3,267 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Last Store | Gem Calculator</title>
+<title>Last Store | Accelerators</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
-body{background:#f3f4f6;color:#111}
-.container{max-width:950px;margin:30px auto;padding:15px}
-h1{font-size:30px;margin-bottom:20px;font-weight:700;text-align:center}
-
-/* LOGO */
-.logo-container{
-text-align:center;
-margin-bottom:20px;
-}
-.logo-container img{
-max-width:260px;
-width:100%;
-height:auto;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Orbitron',sans-serif;
 }
 
-/* POWER RANGE */
-.power-box{
-background:#fff;
-padding:15px;
-border-radius:8px;
-margin-bottom:20px;
-}
-.power-box select{
-width:100%;
-padding:10px;
-border-radius:6px;
-border:1px solid #ccc;
-}
-.btn-calc{
-margin-top:10px;
-padding:10px 15px;
-background:#3b82f6;
+body{
+background:#0d1117;
 color:#fff;
-border:none;
-border-radius:6px;
-cursor:pointer;
+overflow-x:hidden;
 }
 
-/* TABS */
-.tabs{
+/* NAVBAR */
+nav{
+width:100%;
+padding:20px 5%;
 display:flex;
-background:#5b3c88;
-color:#fff;
-overflow:auto;
-border-radius:6px 6px 0 0;
-}
-.tabs div{
-padding:15px 20px;
-cursor:pointer;
-opacity:.7;
-white-space:nowrap;
-}
-.tabs div.active{
-background:#7a55b4;
-opacity:1;
+justify-content:space-between;
+align-items:center;
+background:#111827;
+border-bottom:1px solid #1f2937;
+position:fixed;
+top:0;
+z-index:1000;
 }
 
-/* TABLE */
-.table{
-width:100%;
-background:#5b3c88;
-color:#fff;
-border-collapse:collapse;
-}
-.table th,.table td{
-padding:12px;
-border:1px solid rgba(255,255,255,.1);
-}
-.table th{
-background:#4e3476;
-}
-.table input{
-width:100%;
-padding:8px;
-border-radius:6px;
-border:none;
+nav img{
+height:60px;
 }
 
-/* ORDER */
-.order-box{
-background:#6d4c9c;
-color:#fff;
-padding:20px;
-margin-top:20px;
-border-radius:0 0 6px 6px;
-}
-.order-box h2{
-margin-bottom:15px;
-}
-.total{
-font-size:20px;
-margin-top:10px;
-}
-.total span{
-font-weight:700;
-color:#ffd54f;
+nav ul{
+display:flex;
+gap:30px;
+list-style:none;
 }
 
-/* CLIENT INFO */
-.client-box{
-background:#fff;
-padding:15px;
-margin-top:20px;
-border-radius:8px;
-}
-.client-box input,.client-box select{
-width:100%;
-padding:10px;
-margin-bottom:10px;
-border-radius:6px;
-border:1px solid #ccc;
-}
-.btn-whatsapp{
-background:#25D366;
-color:#fff;
-padding:12px;
-border:none;
-border-radius:6px;
-width:100%;
+nav ul li a{
+color:#00f0ff;
+text-decoration:none;
 font-weight:600;
-cursor:pointer;
+transition:0.3s;
 }
 
-@media(max-width:600px){
-h1{font-size:24px}
-.logo-container img{max-width:200px;}
+nav ul li a:hover{
+color:#fff;
+}
+
+/* HERO */
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:0 20px;
+background:linear-gradient(to bottom,#0d1117,#111827);
+}
+
+.hero h1{
+font-size:48px;
+color:#00f0ff;
+margin-bottom:20px;
+}
+
+.hero p{
+font-size:18px;
+color:#ccc;
+margin-bottom:40px;
+}
+
+.hero button{
+padding:15px 40px;
+font-size:16px;
+border:none;
+border-radius:30px;
+background:#00f0ff;
+color:#000;
+cursor:pointer;
+transition:0.3s;
+}
+
+.hero button:hover{
+background:#00c8d7;
+}
+
+/* SECTION */
+section{
+padding:100px 5%;
+}
+
+.section-title{
+text-align:center;
+font-size:36px;
+margin-bottom:60px;
+color:#00f0ff;
+}
+
+/* CARDS */
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:40px;
+}
+
+.card{
+background:#111827;
+padding:40px;
+border-radius:20px;
+text-align:center;
+border:1px solid #1f2937;
+transition:0.4s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 25px #00f0ff50;
+}
+
+.card h3{
+margin-bottom:20px;
+color:#00f0ff;
+}
+
+.card p{
+margin-bottom:20px;
+color:#aaa;
+}
+
+.card input{
+width:100%;
+padding:12px;
+margin-bottom:20px;
+border:none;
+border-radius:10px;
+text-align:center;
+}
+
+.card button{
+padding:12px 25px;
+border:none;
+border-radius:20px;
+background:#00f0ff;
+cursor:pointer;
+font-weight:bold;
+}
+
+.result{
+margin-top:15px;
+font-size:18px;
+color:#00ff99;
+}
+
+/* FOOTER */
+footer{
+background:#111827;
+padding:40px;
+text-align:center;
+border-top:1px solid #1f2937;
+color:#888;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+.hero h1{
+font-size:32px;
+}
 }
 </style>
 </head>
-
 <body>
 
-<div class="container">
-
-<div class="logo-container">
+<nav>
 <img src="logo.png" alt="Last Store Logo">
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#accelerators">Accelerators</a></li>
+<li><a href="#calculator">Calculator</a></li>
+</ul>
+</nav>
+
+<div class="hero" id="home">
+<h1>LAST STORE ACCELERATORS</h1>
+<p>Professional Speed Boost Calculations for Elite Players</p>
+<button onclick="scrollToSection()">Explore Now</button>
 </div>
 
-<h1>Build Your Order</h1>
+<section id="accelerators">
+<h2 class="section-title">Accelerators</h2>
+<div class="cards">
 
-<div class="power-box">
-<label>What is your Castle Power Range?</label>
-<select>
-<option>0m - 80m</option>
-<option>80m - 200m</option>
-<option>200m - 500m</option>
-<option>500m+</option>
-</select>
-<button class="btn-calc">Calculate Price</button>
+<div class="card">
+<h3>15 Hours Accelerator</h3>
+<p>Boost your progress with precision timing.</p>
 </div>
 
-<div class="tabs">
-<div class="active">Speed Ups</div>
-<div>Combat</div>
-<div>Boost</div>
-<div>Resources</div>
-<div>Chests</div>
-<div>Buildings</div>
-<div>Familiar</div>
-<div>Monster Hunt</div>
+<div class="card">
+<h3>24 Hours Accelerator</h3>
+<p>Full day acceleration for maximum efficiency.</p>
 </div>
 
-<table class="table">
-<thead>
-<tr>
-<th>Item Name</th>
-<th>Gem</th>
-<th>Quantity</th>
-</tr>
-</thead>
-<tbody>
-
-<tr><td>Speed 60 Minutes</td><td>130</td><td><input type="number" id="m60"></td></tr>
-<tr><td>Speed 3 Hours</td><td>300</td><td><input type="number" id="h3"></td></tr>
-<tr><td>Speed 8 Hours</td><td>650</td><td><input type="number" id="h8"></td></tr>
-<tr><td>Speed 15 Hours</td><td>1000</td><td><input type="number" id="h15"></td></tr>
-<tr><td>Speed 24 Hours</td><td>1500</td><td><input type="number" id="h24"></td></tr>
-<tr><td>Speed 3 Days</td><td>4400</td><td><input type="number" id="d3"></td></tr>
-<tr><td>Speed 7 Days</td><td>10000</td><td><input type="number" id="d7"></td></tr>
-<tr><td>Speed 30 Days</td><td>40000</td><td><input type="number" id="d30"></td></tr>
-
-</tbody>
-</table>
-
-<div class="order-box">
-<h2>My Order (Take Screenshot)</h2>
-<div id="summary"></div>
-<div class="total">
-Total Gems: <span id="total">0</span>
-</div>
-</div>
-
-<div class="client-box">
-<h3>Client Information</h3>
-<input type="text" id="name" placeholder="Client Name">
-<select id="seller">
-<option value="573002560262">+57 3002560262</option>
-<option value="51950501387">+51 950501387</option>
-<option value="5491167662445">+54 9 11 67662445</option>
-<option value="584245125670">+58 4245125670</option>
-<option value="584121935238">+58 4121935238</option>
-<option value="51955121605">+51 955121605</option>
-<option value="5493865820180">+54 9 3865820180</option>
-</select>
-<input type="text" id="payment" placeholder="Payment Method">
-<button class="btn-whatsapp" onclick="sendOrder()">Send Order via WhatsApp</button>
+<div class="card">
+<h3>3 Days Accelerator</h3>
+<p>Ultimate power boost for elite upgrades.</p>
 </div>
 
 </div>
+</section>
+
+<section id="calculator">
+<h2 class="section-title">Accelerator Calculator</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>15 Hours</h3>
+<input type="number" id="input15" placeholder="Enter quantity">
+<button onclick="calc(15,'input15','res15')">Calculate</button>
+<div id="res15" class="result"></div>
+</div>
+
+<div class="card">
+<h3>24 Hours</h3>
+<input type="number" id="input24" placeholder="Enter quantity">
+<button onclick="calc(24,'input24','res24')">Calculate</button>
+<div id="res24" class="result"></div>
+</div>
+
+<div class="card">
+<h3>3 Days</h3>
+<input type="number" id="input72" placeholder="Enter quantity">
+<button onclick="calc(72,'input72','res72')">Calculate</button>
+<div id="res72" class="result"></div>
+</div>
+
+</div>
+</section>
+
+<footer>
+© 2026 Last Store. All Rights Reserved.
+</footer>
 
 <script>
-const prices={
-m60:130,h3:300,h8:650,h15:1000,h24:1500,d3:4400,d7:10000,d30:40000
-};
-
-function calculate(){
-let total=0;
-let summary="";
-for(let id in prices){
-let qty=parseInt(document.getElementById(id).value)||0;
-if(qty>0){
-let subtotal=qty*prices[id];
-total+=subtotal;
-summary+=qty+" x "+id+" = "+subtotal+" gems<br>";
-}
-}
-document.getElementById("total").innerText=total;
-document.getElementById("summary").innerHTML=summary;
+function scrollToSection(){
+document.getElementById("accelerators").scrollIntoView({behavior:"smooth"});
 }
 
-document.querySelectorAll("input[type=number]").forEach(input=>{
-input.addEventListener("input",calculate);
-});
-
-function sendOrder(){
-let total=document.getElementById("total").innerText;
-let name=document.getElementById("name").value;
-let payment=document.getElementById("payment").value;
-let seller=document.getElementById("seller").value;
-
-let message=`Last Store Order%0AClient: ${name}%0APayment: ${payment}%0ATotal Gems: ${total}`;
-window.location.href=`https://wa.me/${seller}?text=${message}`;
+function calc(hours,inputId,resultId){
+let qty=document.getElementById(inputId).value;
+if(qty<=0){
+document.getElementById(resultId).innerHTML="Enter valid number";
+return;
+}
+let total=qty*hours;
+document.getElementById(resultId).innerHTML="Total Hours: "+total+"h";
 }
 </script>
 
