@@ -3,166 +3,84 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Last Store | Professional Gem Calculator</title>
+<title>Last Store</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#0d1117;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden}
-
-/* NAVBAR */
-nav{
-position:fixed;
-top:0;
-width:100%;
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{background:#0d1117;color:#fff;}
+header{
 background:#111827;
+padding:20px 40px;
+display:flex;
+align-items:center;
+border-bottom:2px solid #1f2937;
+}
+.logo svg{height:55px;}
+.container{max-width:1200px;margin:auto;padding:30px;}
+.section{
+background:#111827;
+margin-bottom:25px;
+padding:25px;
+border-radius:15px;
+box-shadow:0 0 20px rgba(0,0,0,0.4);
+}
+.section h2{
+margin-bottom:20px;
+font-family:Orbitron;
+color:#facc15;
+}
+.item{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:15px 5%;
-z-index:1000;
-border-bottom:1px solid #1f2937;
-}
-
-/* SVG LOGO */
-.logo svg{height:55px}
-
-nav ul{display:flex;gap:25px;list-style:none}
-nav a{color:#00f0ff;text-decoration:none;font-weight:600;transition:.3s}
-nav a:hover{color:#fff}
-
-/* HERO */
-.hero{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-background:linear-gradient(to bottom,#0d1117,#111827);
-padding:20px;
-}
-.hero h1{
-font-family:'Orbitron',sans-serif;
-font-size:48px;
-color:#FFD700;
-margin-bottom:20px;
-}
-.hero p{color:#ccc;margin-bottom:30px}
-.hero button{
-padding:14px 35px;
-background:#FFD700;
-border:none;
-border-radius:30px;
-font-weight:bold;
-cursor:pointer;
-}
-.hero button:hover{background:#e6c200}
-
-/* SECTION */
-section{padding:100px 5%}
-.section-title{
-text-align:center;
-font-size:34px;
-color:#FFD700;
-margin-bottom:40px;
-font-family:'Orbitron',sans-serif;
-}
-
-/* TABLE */
-.table-container{overflow-x:auto}
-table{
-width:100%;
-border-collapse:collapse;
-background:#111827;
-border-radius:12px;
-overflow:hidden;
-}
-th,td{
-padding:15px;
-border-bottom:1px solid #1f2937;
-text-align:center;
-}
-th{
+margin-bottom:12px;
 background:#1f2937;
-color:#FFD700;
+padding:10px 15px;
+border-radius:10px;
 }
-input[type=number]{
-width:90px;
-padding:8px;
-border-radius:6px;
-border:none;
+.item input{
+width:80px;
+padding:5px;
+background:#0d1117;
+border:1px solid #333;
+color:white;
 text-align:center;
 }
-
-/* ORDER */
-.order-box{
-background:#111827;
-padding:25px;
-margin-top:30px;
-border-radius:12px;
-border:1px solid #1f2937;
-}
-.order-box h3{color:#FFD700;margin-bottom:15px}
-.total{
+.total-box{
+background:#0f172a;
+padding:20px;
+border-radius:15px;
+text-align:center;
 font-size:22px;
-margin-top:10px;
+font-weight:600;
+margin-top:20px;
 }
-.total span{
-color:#00ff99;
-font-weight:bold;
-}
-
-/* GEM CALC */
-.gem-box{
-background:#111827;
-padding:25px;
-border-radius:12px;
-border:1px solid #1f2937;
-max-width:500px;
-margin:auto;
-text-align:center;
-}
-.gem-box input{
-padding:10px;
+select,button{
 width:100%;
-margin-bottom:15px;
-border-radius:6px;
+padding:12px;
+margin-top:12px;
+border-radius:10px;
 border:none;
-text-align:center;
+font-size:15px;
 }
-.gem-box button{
-padding:12px 25px;
-border:none;
-border-radius:20px;
-background:#FFD700;
-font-weight:bold;
+select{background:#1f2937;color:white;}
+button{
+background:#facc15;
+color:black;
+font-weight:700;
 cursor:pointer;
+transition:0.3s;
 }
-.gem-result{
-margin-top:15px;
-font-size:18px;
-color:#00ff99;
-}
-
-/* FOOTER */
-footer{
-background:#111827;
-padding:40px;
-text-align:center;
-border-top:1px solid #1f2937;
-color:#888;
-}
-
-@media(max-width:768px){
-.hero h1{font-size:32px}
-}
+button:hover{background:#eab308;}
+footer{text-align:center;padding:20px;color:#777;}
 </style>
 </head>
+
 <body>
 
-<nav>
+<header>
 <div class="logo">
 <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
 <defs>
@@ -174,110 +92,136 @@ color:#888;
 </defs>
 <circle cx="100" cy="100" r="70" fill="url(#gold)" opacity="0.9"/>
 <circle cx="100" cy="100" r="50" fill="#0d1117"/>
-<text x="70" y="115" font-size="60" font-weight="900" fill="url(#gold)" font-family="Orbitron">LS</text>
-<text x="200" y="110" font-size="55" font-weight="900" fill="url(#gold)" font-family="Orbitron">
-LAST STORE
-</text>
+<text x="70" y="115" font-size="60" font-weight="800" fill="url(#gold)" font-family="Orbitron">LS</text>
+<text x="200" y="110" font-size="55" font-weight="800" fill="url(#gold)" font-family="Orbitron">LAST STORE</text>
 </svg>
 </div>
+</header>
 
-<ul>
-<li><a href="#accelerators">Accelerators</a></li>
-<li><a href="#gems">Gem Calculator</a></li>
-</ul>
-</nav>
+<div class="container">
 
-<div class="hero">
-<h1>Professional Gem Calculator</h1>
-<p>Elite Accelerator & Gem Estimation Tool</p>
-<button onclick="document.getElementById('accelerators').scrollIntoView({behavior:'smooth'})">
-Start Now
-</button>
+<!-- SPEED UPS -->
+<div class="section">
+<h2>Speed Ups</h2>
+<div class="item"><span>3 Days (4,400 Gems)</span><input type="number" min="0" value="0" data-price="4400"></div>
+<div class="item"><span>15 Days (22,000 Gems)</span><input type="number" min="0" value="0" data-price="22000"></div>
+<div class="item"><span>24 Days (35,000 Gems)</span><input type="number" min="0" value="0" data-price="35000"></div>
 </div>
 
-<section id="accelerators">
-<h2 class="section-title">Accelerators</h2>
-
-<div class="table-container">
-<table>
-<tr>
-<th>Item</th>
-<th>Gem Cost</th>
-<th>Quantity</th>
-</tr>
-<tr>
-<td>15 Hours</td>
-<td>1,000</td>
-<td><input type="number" id="a15"></td>
-</tr>
-<tr>
-<td>24 Hours</td>
-<td>1,500</td>
-<td><input type="number" id="a24"></td>
-</tr>
-<tr>
-<td>3 Days</td>
-<td>4,400</td>
-<td><input type="number" id="a3d"></td>
-</tr>
-</table>
+<!-- COMBAT -->
+<div class="section">
+<h2>Combat</h2>
+<div class="item"><span>Army ATK Boost (2,000 Gems)</span><input type="number" min="0" value="0" data-price="2000"></div>
+<div class="item"><span>Army DEF Boost (2,000 Gems)</span><input type="number" min="0" value="0" data-price="2000"></div>
 </div>
 
-<div class="order-box">
-<h3>Order Summary</h3>
-<div id="summary"></div>
-<div class="total">
+<!-- BOOST -->
+<div class="section">
+<h2>Boost</h2>
+<div class="item"><span>Training Speed Boost (1,500 Gems)</span><input type="number" min="0" value="0" data-price="1500"></div>
+<div class="item"><span>Research Speed Boost (1,800 Gems)</span><input type="number" min="0" value="0" data-price="1800"></div>
+</div>
+
+<!-- RESOURCES -->
+<div class="section">
+<h2>Resources</h2>
+<div class="item"><span>Food Pack (1,000 Gems)</span><input type="number" min="0" value="0" data-price="1000"></div>
+<div class="item"><span>Stone Pack (1,000 Gems)</span><input type="number" min="0" value="0" data-price="1000"></div>
+<div class="item"><span>Gold Pack (1,500 Gems)</span><input type="number" min="0" value="0" data-price="1500"></div>
+</div>
+
+<!-- CHEST -->
+<div class="section">
+<h2>Chest</h2>
+<div class="item"><span>Rare Chest (3,000 Gems)</span><input type="number" min="0" value="0" data-price="3000"></div>
+<div class="item"><span>Epic Chest (5,000 Gems)</span><input type="number" min="0" value="0" data-price="5000"></div>
+</div>
+
+<!-- BUILDING -->
+<div class="section">
+<h2>Building</h2>
+<div class="item"><span>Building Speed Boost (2,500 Gems)</span><input type="number" min="0" value="0" data-price="2500"></div>
+</div>
+
+<!-- FAMILIAR -->
+<div class="section">
+<h2>Familiar</h2>
+<div class="item"><span>Familiar EXP Pack (2,200 Gems)</span><input type="number" min="0" value="0" data-price="2200"></div>
+</div>
+
+<!-- MONSTER HUNT -->
+<div class="section">
+<h2>Monster Hunt</h2>
+<div class="item"><span>Energy Pack (1,200 Gems)</span><input type="number" min="0" value="0" data-price="1200"></div>
+</div>
+
+<div class="total-box">
 Total Gems: <span id="total">0</span>
 </div>
-</div>
-</section>
 
-<section id="gems">
-<h2 class="section-title">Gem Calculator</h2>
+<select id="seller">
+<option value="random">Random Seller</option>
+<option value="51950501387">+51 950 501 387</option>
+<option value="5491167662445">+54 9 11 6766 2445</option>
+<option value="584245125670">+58 424 512 5670</option>
+<option value="584121935238">+58 412 193 5238</option>
+<option value="51955121605">+51 955 121 605</option>
+<option value="5493865820180">+54 9 3865 82 0180</option>
+<option value="573002560262">+57 300 256 0262</option>
+</select>
 
-<div class="gem-box">
-<input type="number" id="gemInput" placeholder="Enter gem amount">
-<button onclick="calculateGems()">Calculate</button>
-<div id="gemResult" class="gem-result"></div>
+<button onclick="sendOrder()">Send Order via WhatsApp</button>
+
 </div>
-</section>
 
 <footer>
-© 2026 Last Store. All Rights Reserved.
+© 2026 Last Store
 </footer>
 
 <script>
-const prices={a15:1000,a24:1500,a3d:4400};
+const inputs=document.querySelectorAll('input');
+const totalDisplay=document.getElementById('total');
 
-function formatNumber(num){
-return Number(num).toLocaleString("en-US");
-}
+inputs.forEach(i=>i.addEventListener('input',calculate));
 
 function calculate(){
 let total=0;
-let summary="";
-for(let id in prices){
-let qty=parseInt(document.getElementById(id).value)||0;
-if(qty>0){
-let subtotal=qty*prices[id];
-total+=subtotal;
-summary+=qty+" x "+id+" = "+formatNumber(subtotal)+" gems<br>";
-}
-}
-document.getElementById("total").innerText=formatNumber(total);
-document.getElementById("summary").innerHTML=summary;
+inputs.forEach(i=>{total+=i.value*i.dataset.price});
+totalDisplay.innerText=total.toLocaleString();
 }
 
-document.querySelectorAll("input[type=number]").forEach(input=>{
-input.addEventListener("input",calculate);
+function sendOrder(){
+let total=0;
+let message="Hello, I want to order:%0A";
+
+inputs.forEach(i=>{
+if(i.value>0){
+const name=i.parentElement.querySelector('span').innerText;
+message+="- "+i.value+" x "+name+"%0A";
+total+=i.value*i.dataset.price;
+}
 });
 
-function calculateGems(){
-let gems=document.getElementById("gemInput").value;
-if(gems<=0)return;
-let value=gems*0.002;
-document.getElementById("gemResult").innerHTML=
-"Gems: "+formatNumber(gems)+"<br>Estimated Value: $"+formatNumber(value.toFixed(2));
+if(total===0){alert("Select at least one item.");return;}
+
+message+="%0ATotal Gems: "+total.toLocaleString();
+
+const sellers=[
+"51950501387",
+"5491167662445",
+"584245125670",
+"584121935238",
+"51955121605",
+"5493865820180",
+"573002560262"
+];
+
+let selected=document.getElementById('seller').value;
+if(selected==="random"){
+selected=sellers[Math.floor(Math.random()*sellers.length)];
+}
+
+window.location.href="https://wa.me/"+selected+"?text="+message;
 }
 </script>
 
