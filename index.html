@@ -69,8 +69,9 @@ header{background:#03102a;padding:20px;text-align:center;font-size:36px;font-wei
 </select>
 <button class="send" onclick="sendOrder()">Send Order</button>
 </div>
+
 <script>
-// TODOS LOS ARTÍCULOS CON PRECIOS REALES DE LORDSGEMS
+// ===== TODOS LOS ARTÍCULOS =====
 const data = {
 speed:[
 {name:"1 Hour Speed Up",price:130},
@@ -138,31 +139,27 @@ monster:[
 {name:"Monster Hunt Energy 10000",price:2000},
 {name:"Monster Hunt Energy 20000",price:3500},
 {name:"Monster Hunt Energy 50000",price:7500}
-];
+};
+
 // ===== VARIABLES =====
 let cart = {};
 const imageInput = document.getElementById("images");
 const preview = document.getElementById("preview");
 
 // ===== FORMATO NUMÉRICO =====
-function format(n){
-    return n.toLocaleString();
-}
+function format(n){return n.toLocaleString();}
 
 // ===== RENDER ITEMS =====
 function render(){
     const container = document.getElementById("items");
     container.innerHTML = "";
-
     for(const cat in data){
         const section = document.createElement("div");
         section.className = "section";
         section.dataset.cat = cat;
         section.innerHTML = `<h2>${cat.toUpperCase()}</h2><div class="grid"></div>`;
-
         data[cat].forEach(item=>{
             const safeId = item.name.replace(/[^a-zA-Z0-9]/g,"_");
-
             const card = document.createElement("div");
             card.className = "card";
             card.innerHTML = `
@@ -176,71 +173,62 @@ function render(){
             `;
             section.querySelector(".grid").appendChild(card);
         });
-
         container.appendChild(section);
     }
 }
 
 // ===== ACTUALIZAR CANTIDAD =====
 function update(id, change){
-    if(!cart[id]) cart[id] = 0;
-    cart[id] += change;
-    if(cart[id] < 0) cart[id] = 0;
-
+    if(!cart[id]) cart[id]=0;
+    cart[id]+=change;
+    if(cart[id]<0) cart[id]=0;
     document.getElementById(id).innerText = cart[id];
     updateSummary();
 }
 
 // ===== RESUMEN =====
 function updateSummary(){
-    let total = 0;
-    let summary = "";
-
+    let total=0, summary="";
     for(const cat in data){
         data[cat].forEach(item=>{
-            const id = item.name.replace(/[^a-zA-Z0-9]/g,"_");
-            if(cart[id] > 0){
-                let subtotal = cart[id] * item.price;
-                total += subtotal;
-                summary += `<div class="summary-item">${item.name} x${cart[id]} = ${format(subtotal)}</div>`;
+            const id=item.name.replace(/[^a-zA-Z0-9]/g,"_");
+            if(cart[id]>0){
+                let subtotal = cart[id]*item.price;
+                total+=subtotal;
+                summary+=`<div class="summary-item">${item.name} x${cart[id]} = ${format(subtotal)}</div>`;
             }
         });
     }
-
     document.getElementById("summaryList").innerHTML = summary;
     document.getElementById("total").innerText = format(total);
 }
 
 // ===== BUSCADOR =====
 document.getElementById("search").addEventListener("input", function(){
-    const value = this.value.toLowerCase();
+    const value=this.value.toLowerCase();
     document.querySelectorAll(".card").forEach(card=>{
-        card.style.display = card.innerText.toLowerCase().includes(value) ? "block" : "none";
+        card.style.display = card.innerText.toLowerCase().includes(value)?"block":"none";
     });
 });
 
 // ===== FILTRO CATEGORÍA =====
 document.getElementById("filter").addEventListener("change", function(){
-    const value = this.value;
+    const value=this.value;
     document.querySelectorAll(".section").forEach(sec=>{
-        if(value === "all"){
-            sec.style.display = "block";
-        } else {
-            sec.style.display = sec.dataset.cat === value ? "block" : "none";
-        }
+        sec.style.display = (value==="all" || sec.dataset.cat===value)?"block":"none";
     });
 });
 
 // ===== PREVIEW IMÁGENES =====
 imageInput.addEventListener("change", function(){
-    preview.innerHTML = "";
+    preview.innerHTML="";
     Array.from(this.files).forEach(file=>{
-        const reader = new FileReader();
-        reader.onload = function(e){
-            const img = document.createElement("img");
-            img.src = e.target.result;
-            img.style.width = "80px";
-            img.style.borderRadius = "8px";
+        const reader=new FileReader();
+        reader.onload=function(e){
+            const img=document.createElement("img");
+            img.src=e.target.result;
+            img.style.width="80px";
+            img.style.borderRadius="8px";
             preview.appendChild(img);
         };
         reader.readAsDataURL(file);
@@ -249,27 +237,23 @@ imageInput.addEventListener("change", function(){
 
 // ===== ENVIAR A WHATSAPP =====
 function sendOrder(){
-    let msg = "🔥 LAST STORE ORDER 🔥%0A%0A";
-    let total = 0;
-
+    let msg="🔥 LAST STORE ORDER 🔥%0A%0A";
+    let total=0;
     for(const cat in data){
         data[cat].forEach(item=>{
-            const id = item.name.replace(/[^a-zA-Z0-9]/g,"_");
-            if(cart[id] > 0){
-                msg += item.name + " x" + cart[id] + "%0A";
-                total += cart[id] * item.price;
+            const id=item.name.replace(/[^a-zA-Z0-9]/g,"_");
+            if(cart[id]>0){
+                msg+=item.name+" x"+cart[id]+"%0A";
+                total+=cart[id]*item.price;
             }
         });
     }
-
-    if(imageInput.files.length > 0){
-        msg += "%0AClient will send " + imageInput.files.length + " screenshot(s) after this message.%0A";
+    if(imageInput.files.length>0){
+        msg+="%0AClient will send "+imageInput.files.length+" screenshot(s) after this message.%0A";
     }
-
-    msg += "%0ATotal Gems: " + format(total);
-
-    const seller = document.getElementById("seller").value;
-    window.location.href = "https://wa.me/" + seller + "?text=" + msg;
+    msg+="%0ATotal Gems: "+format(total);
+    const seller=document.getElementById("seller").value;
+    window.location.href="https://wa.me/"+seller+"?text="+msg;
 }
 
 // ===== INICIAR =====
