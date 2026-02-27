@@ -3,47 +3,102 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Last Store - GOD Version</title>
+<title>Last Store - GOD</title>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial,sans-serif;}
-body{background:linear-gradient(135deg,#06142d,#0c2d63);color:#fff;}
-header{background:#03102a;padding:20px;text-align:center;font-size:36px;font-weight:900;letter-spacing:2px;color:#00c3ff;box-shadow:0 5px 20px rgba(0,0,0,.6);position:sticky;top:0;z-index:1000;}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Segoe UI,Arial;}
+body{background:linear-gradient(135deg,#071a3d,#0c2f6b);color:#fff;}
+header{background:#02122b;padding:20px;text-align:center;font-size:32px;font-weight:900;color:#00cfff;letter-spacing:2px;}
 .container{max-width:1400px;margin:auto;padding:20px;}
-.controls{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:25px;}
-.controls input,.controls select{flex:1;padding:12px;border-radius:10px;border:none;font-size:14px;}
-.section{margin-bottom:45px;}
-.section h2{margin-bottom:15px;border-left:6px solid #00c3ff;padding-left:12px;font-size:22px;display:flex;align-items:center;gap:8px;}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
-.card{background:linear-gradient(145deg,#0f2f6d,#123f8c);padding:18px;border-radius:14px;box-shadow:0 8px 25px rgba(0,0,0,.7);transition:.4s;display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden;}
-.card:hover{transform:translateY(-8px) scale(1.02);}
-.card h3{display:flex;align-items:center;gap:6px;font-size:16px;}
-.price{color:#00e1ff;font-weight:bold;font-size:15px;}
-.qty-control{display:flex;justify-content:space-between;align-items:center;margin-top:6px;}
-.qty-control button{width:36px;height:36px;border:none;border-radius:8px;background:#00c3ff;color:#fff;font-size:18px;cursor:pointer;transition:.3s;}
-.qty-control button:hover{transform:scale(1.2);}
-.qty{font-weight:bold;font-size:16px;transition:.3s;}
-.summary{position:fixed;right:20px;bottom:110px;width:320px;background:#03102a;padding:18px;border-radius:14px;box-shadow:0 8px 25px rgba(0,0,0,.7);max-height:420px;overflow:auto;opacity:0;transition:.5s;}
-.summary.show{opacity:1;}
-.summary h3{margin-bottom:10px;}
-.summary-item{font-size:13px;margin-bottom:5px;animation:fadeIn 0.4s;}
-@keyframes fadeIn{from{opacity:0;transform:translateX(10px);}to{opacity:1;transform:translateX(0);}}
-.total-bar{position:fixed;bottom:0;left:0;width:100%;background:#020d22;padding:18px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 -6px 20px rgba(0,0,0,.8);flex-wrap:wrap;gap:10px;}
-.total{font-size:20px;font-weight:800;color:#00e1ff;}
-.total-bar select{padding:10px;border-radius:8px;border:none;}
-.send{background:linear-gradient(90deg,#00c3ff,#005eff);padding:12px 30px;border:none;border-radius:10px;color:white;font-weight:bold;cursor:pointer;transition:.3s;font-size:16px;}
-.send:hover{transform:scale(1.05);}
-img.preview-img{width:80px;border-radius:8px;transition:.3s;}
-img.preview-img:hover{transform:scale(1.1);}
-@media(max-width:768px){.summary{position:static;width:100%;margin-top:20px;}}
+.controls{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:25px;}
+.controls input,.controls select{
+padding:10px;border-radius:8px;border:none;font-size:14px;
+}
+.section{margin-bottom:40px;}
+.section h2{
+margin-bottom:15px;
+border-left:5px solid #00cfff;
+padding-left:10px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:15px;
+}
+.card{
+background:#0e2f6f;
+padding:15px;
+border-radius:12px;
+transition:.3s;
+box-shadow:0 5px 15px rgba(0,0,0,.5);
+}
+.card:hover{transform:translateY(-5px);}
+.price{color:#00e1ff;font-weight:bold;margin:5px 0;}
+.qty-control{display:flex;justify-content:space-between;align-items:center;}
+.qty-control button{
+width:30px;height:30px;
+border:none;border-radius:6px;
+background:#00cfff;color:#000;
+font-weight:bold;cursor:pointer;
+}
+.qty{font-weight:bold;}
+.summary{
+position:fixed;
+right:20px;
+bottom:120px;
+width:300px;
+background:#02122b;
+padding:15px;
+border-radius:12px;
+max-height:350px;
+overflow:auto;
+}
+.total-bar{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#010c1f;
+padding:15px;
+display:flex;
+flex-wrap:wrap;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+}
+.total{font-size:18px;font-weight:bold;color:#00e1ff;}
+.send{
+background:#00cfff;
+border:none;
+padding:10px 25px;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+}
+.preview img{
+width:70px;
+border-radius:6px;
+margin:5px;
+}
+@media(max-width:768px){
+.summary{position:static;margin-top:20px;width:100%;}
+}
 </style>
 </head>
 <body>
+
 <header>LAST STORE</header>
+
 <div class="container">
+
 <div class="controls">
 <input type="text" id="search" placeholder="Search item...">
-<select id="filter">
+<select id="categoryFilter">
 <option value="all">All Categories</option>
 <option value="speed">Speed Ups</option>
 <option value="combat">Combat</option>
@@ -54,19 +109,27 @@ img.preview-img:hover{transform:scale(1.1);}
 <option value="familiar">Familiar</option>
 <option value="monster">Monster Hunt</option>
 </select>
+
+<input type="number" id="minPrice" placeholder="Min Gems">
+<input type="number" id="maxPrice" placeholder="Max Gems">
 </div>
+
 <div id="items"></div>
-<h3 style="margin-top:15px;">Upload Screenshots</h3>
-<input type="file" id="images" multiple accept="image/*" style="margin-top:10px;">
-<div id="preview" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;"></div>
-<p style="font-size:12px;margin-top:10px;color:#ccc;">Note: Images will need to be sent manually in WhatsApp after redirection.</p>
+
+<h3 style="margin-top:20px;">Upload Screenshots</h3>
+<input type="file" id="images" multiple accept="image/*">
+<div class="preview" id="preview"></div>
+
 </div>
-<div class="summary" id="summary">
+
+<div class="summary">
 <h3>Order Summary</h3>
 <div id="summaryList"></div>
 </div>
+
 <div class="total-bar">
 <div class="total">Total Gems: <span id="total">0</span></div>
+
 <select id="seller">
 <option value="51950501387">Seller 1</option>
 <option value="5491167662445">Seller 2</option>
@@ -76,206 +139,130 @@ img.preview-img:hover{transform:scale(1.1);}
 <option value="5493865820180">Seller 6</option>
 <option value="573002560262">Seller 7</option>
 </select>
-<button class="send" id="sendBtn"><i class="fab fa-whatsapp"></i> Send Order</button>
+
+<button class="send" onclick="sendWhatsApp()">Send to WhatsApp</button>
 </div>
 
 <script>
-// ===== DATOS =====
-const data = {
+
+const data={
 speed:[
-{name:"1 Hour Speed Up",price:130,icon:"fa-clock"},
-{name:"3 Hour Speed Up",price:300,icon:"fa-clock"},
-{name:"8 Hour Speed Up",price:650,icon:"fa-clock"},
-{name:"15 Hour Speed Up",price:1000,icon:"fa-clock"},
-{name:"24 Hour Speed Up",price:1500,icon:"fa-clock"},
-{name:"3 Day Speed Up",price:4400,icon:"fa-clock"},
-{name:"7 Day Speed Up",price:10000,icon:"fa-clock"},
-{name:"30 Day Speed Up",price:40000,icon:"fa-clock"}
+{name:"1 Hour Speed Up",price:130},
+{name:"3 Hour Speed Up",price:300},
+{name:"8 Hour Speed Up",price:650},
+{name:"24 Hour Speed Up",price:1500}
 ],
 combat:[
-{name:"Relocator",price:1500,icon:"fa-shield-alt"},
-{name:"Random Relocator",price:500,icon:"fa-shield-alt"},
-{name:"24h Shield",price:1000,icon:"fa-shield-alt"},
-{name:"3d Shield",price:3500,icon:"fa-shield-alt"},
-{name:"7d Shield",price:10000,icon:"fa-shield-alt"},
-{name:"Braveheart",price:2000,icon:"fa-swords"},
-{name:"Anti-Scout 24h",price:600,icon:"fa-swords"},
-{name:"Anti-Scout 3d",price:1200,icon:"fa-swords"},
-{name:"Anti-Scout 7d",price:3000,icon:"fa-swords"}
+{name:"Relocator",price:1500},
+{name:"24h Shield",price:1000}
 ],
 boost:[
-{name:"Attack Boost 20% 12h",price:250,icon:"fa-bolt"},
-{name:"Attack Boost 20% 24h",price:400,icon:"fa-bolt"},
-{name:"Defense Boost 20% 12h",price:250,icon:"fa-bolt"},
-{name:"Defense Boost 20% 24h",price:400,icon:"fa-bolt"},
-{name:"Army Size Boost 20% 4h",price:2400,icon:"fa-bolt"},
-{name:"Army Size Boost 50% 4h",price:5000,icon:"fa-bolt"},
-{name:"Winged Boots 25%",price:500,icon:"fa-bolt"},
-{name:"Winged Boots 50%",price:900,icon:"fa-bolt"},
-{name:"Talent Reset",price:1000,icon:"fa-bolt"},
-{name:"VIP Points",price:300,icon:"fa-bolt"}
+{name:"Attack Boost 20% 24h",price:400}
 ],
 resources:[
-{name:"Food Pack 1M",price:10000,icon:"fa-leaf"},
-{name:"Food Pack 5M",price:45000,icon:"fa-leaf"},
-{name:"Wood Pack 1M",price:10000,icon:"fa-leaf"},
-{name:"Wood Pack 5M",price:45000,icon:"fa-leaf"},
-{name:"Stone Pack 1M",price:10000,icon:"fa-leaf"},
-{name:"Stone Pack 5M",price:45000,icon:"fa-leaf"},
-{name:"Ore Pack 1M",price:10000,icon:"fa-leaf"},
-{name:"Ore Pack 5M",price:45000,icon:"fa-leaf"},
-{name:"Gold Pack 1M",price:10000,icon:"fa-leaf"},
-{name:"Gold Pack 5M",price:45000,icon:"fa-leaf"}
+{name:"Food 1M",price:10000}
 ],
 chest:[
-{name:"Material Chest",price:1500,icon:"fa-box"},
-{name:"Jewel Chest",price:6000,icon:"fa-gem"},
-{name:"Item Chest",price:3000,icon:"fa-box"}
+{name:"Material Chest",price:1500}
 ],
 building:[
-{name:"Building Speed Up 1h",price:130,icon:"fa-building"},
-{name:"Building Speed Up 3h",price:300,icon:"fa-building"},
-{name:"Building Speed Up 8h",price:650,icon:"fa-building"}
+{name:"Building Speed 1h",price:130}
 ],
 familiar:[
-{name:"Familiar Energy 5000",price:1125,icon:"fa-dog"},
-{name:"Familiar Energy 10000",price:2000,icon:"fa-dog"},
-{name:"Familiar Energy 20000",price:3500,icon:"fa-dog"},
-{name:"Familiar Energy 50000",price:7500,icon:"fa-dog"}
+{name:"Familiar Energy 5000",price:1125}
 ],
 monster:[
-{name:"Monster Hunt Energy 5000",price:1125,icon:"fa-dragon"},
-{name:"Monster Hunt Energy 10000",price:2000,icon:"fa-dragon"},
-{name:"Monster Hunt Energy 20000",price:3500,icon:"fa-dragon"},
-{name:"Monster Hunt Energy 50000",price:7500,icon:"fa-dragon"}
+{name:"Monster Energy 5000",price:1125}
+]
 };
 
-// ===== VARIABLES =====
-let cart = {};
-const itemsContainer = document.getElementById("items");
-const summaryDiv = document.getElementById("summary");
-const preview = document.getElementById("preview");
+let cart={};
 
-// ===== FORMAT =====
-function format(n){return n.toLocaleString();}
-
-// ===== RENDER =====
 function render(){
-    itemsContainer.innerHTML = "";
-    let idCounter = 0;
-    for(const cat in data){
-        const section = document.createElement("div");
-        section.className="section";
-        section.dataset.cat=cat;
-        section.innerHTML=`<h2><i class="fa ${data[cat][0].icon}"></i> ${cat.toUpperCase()}</h2><div class="grid"></div>`;
-        const grid = section.querySelector(".grid");
-        data[cat].forEach(item=>{
-            const id = `item_${idCounter++}`;
-            item._id = id;
-            const card = document.createElement("div");
-            card.className="card";
-            card.innerHTML=`
-                <h3><i class="fa ${item.icon}"></i> ${item.name}</h3>
-                <div class="price">${format(item.price)} Gems</div>
-                <div class="qty-control">
-                    <button class="minus">-</button>
-                    <div class="qty" id="${id}">0</div>
-                    <button class="plus">+</button>
-                </div>
-            `;
-            grid.appendChild(card);
-            card.querySelector(".plus").addEventListener("click", ()=>update(item,1));
-            card.querySelector(".minus").addEventListener("click", ()=>update(item,-1));
-        });
-        itemsContainer.appendChild(section);
-    }
+const container=document.getElementById("items");
+container.innerHTML="";
+for(const cat in data){
+let section=document.createElement("div");
+section.className="section";
+section.dataset.cat=cat;
+
+let totalCat=0;
+if(cart[cat]) totalCat=cart[cat];
+
+section.innerHTML=`<h2>${cat.toUpperCase()} <span>(Items: ${totalCat})</span></h2><div class="grid"></div>`;
+let grid=section.querySelector(".grid");
+
+data[cat].forEach(item=>{
+let card=document.createElement("div");
+card.className="card";
+card.innerHTML=`
+<div>${item.name}</div>
+<div class="price">${item.price} Gems</div>
+<div class="qty-control">
+<button onclick="update('${cat}','${item.name}',${item.price},-1)">-</button>
+<div id="${cat}_${item.name}" class="qty">0</div>
+<button onclick="update('${cat}','${item.name}',${item.price},1)">+</button>
+</div>
+`;
+grid.appendChild(card);
+});
+
+container.appendChild(section);
+}
 }
 
-// ===== UPDATE =====
-function update(item,change){
-    const id = item._id;
-    if(!cart[id]) cart[id]=0;
-    cart[id]+=change;
-    if(cart[id]<0) cart[id]=0;
-    const qtyDiv = document.getElementById(id);
-    qtyDiv.innerText = cart[id];
-    qtyDiv.style.transform="scale(1.3)";
-    setTimeout(()=>qtyDiv.style.transform="scale(1)",150);
-    updateSummary();
+function update(cat,name,price,change){
+let key=cat+"_"+name;
+if(!cart[key]) cart[key]={qty:0,price:price,cat:cat,name:name};
+cart[key].qty+=change;
+if(cart[key].qty<0) cart[key].qty=0;
+document.getElementById(key).innerText=cart[key].qty;
+updateSummary();
+render();
 }
 
-// ===== SUMMARY =====
 function updateSummary(){
-    let total=0,summary="";
-    for(const cat in data){
-        data[cat].forEach(item=>{
-            const id = item._id;
-            if(cart[id]>0){
-                const subtotal = cart[id]*item.price;
-                total+=subtotal;
-                summary += `<div class="summary-item">${item.name} x${cart[id]} = ${format(subtotal)}</div>`;
-            }
-        });
-    }
-    summaryDiv.classList.add("show");
-    document.getElementById("summaryList").innerHTML=summary;
-    document.getElementById("total").innerText=format(total);
+let total=0;
+let html="";
+for(const key in cart){
+if(cart[key].qty>0){
+let sub=cart[key].qty*cart[key].price;
+total+=sub;
+html+=`${cart[key].name} x${cart[key].qty} = ${sub}<br>`;
+}
+}
+document.getElementById("summaryList").innerHTML=html;
+document.getElementById("total").innerText=total;
 }
 
-// ===== SEARCH =====
-document.getElementById("search").addEventListener("input",function(){
-    const val=this.value.toLowerCase();
-    document.querySelectorAll(".card").forEach(card=>{
-        card.style.display = card.innerText.toLowerCase().includes(val)?"block":"none";
-    });
-});
+function sendWhatsApp(){
+let seller=document.getElementById("seller").value;
+let msg="🔥 LAST STORE ORDER 🔥%0A%0A";
+for(const key in cart){
+if(cart[key].qty>0){
+msg+=cart[key].name+" x"+cart[key].qty+"%0A";
+}
+}
+msg+="%0ATotal Gems: "+document.getElementById("total").innerText;
+window.location.href=`https://wa.me/${seller}?text=${msg}`;
+}
 
-// ===== FILTER =====
-document.getElementById("filter").addEventListener("change",function(){
-    const val=this.value;
-    document.querySelectorAll(".section").forEach(sec=>{
-        sec.style.display=(val==="all"||sec.dataset.cat===val)?"block":"none";
-    });
-});
-
-// ===== IMAGE PREVIEW =====
 document.getElementById("images").addEventListener("change",function(){
-    preview.innerHTML="";
-    Array.from(this.files).forEach(file=>{
-        const reader = new FileReader();
-        reader.onload=function(e){
-            const img = document.createElement("img");
-            img.src=e.target.result;
-            img.className="preview-img";
-            preview.appendChild(img);
-        };
-        reader.readAsDataURL(file);
-    });
+let preview=document.getElementById("preview");
+preview.innerHTML="";
+Array.from(this.files).forEach(file=>{
+let reader=new FileReader();
+reader.onload=e=>{
+let img=document.createElement("img");
+img.src=e.target.result;
+preview.appendChild(img);
+};
+reader.readAsDataURL(file);
+});
 });
 
-// ===== SEND WHATSAPP =====
-document.getElementById("sendBtn").addEventListener("click",()=>{
-    let msg = "🔥 LAST STORE ORDER 🔥%0A%0A";
-    let total = 0;
-    for(const cat in data){
-        data[cat].forEach(item=>{
-            const id = item._id;
-            if(cart[id]>0){
-                msg += `${item.name} x${cart[id]}%0A`;
-                total += cart[id]*item.price;
-            }
-        });
-    }
-    if(document.getElementById("images").files.length>0){
-        msg += `%0AClient will send ${document.getElementById("images").files.length} screenshot(s) after this message.%0A`;
-    }
-    msg += `%0ATotal Gems: ${format(total)}`;
-    const seller = document.getElementById("seller").value;
-    window.location.href = `https://wa.me/${seller}?text=${msg}`;
-});
+render();
 
-// ===== INIT =====
-window.onload = render;
 </script>
 </body>
 </html>
