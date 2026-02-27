@@ -1,165 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Last Store</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;}
-
 body{
-background:radial-gradient(circle at top,#111827,#05070d);
-color:#fff;
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#0b1220;
+color:white;
 }
 
 header{
+background:linear-gradient(90deg,#0044ff,#00aaff);
+padding:20px;
 text-align:center;
-padding:25px;
-font-size:30px;
-font-weight:800;
-letter-spacing:2px;
-color:#00e5ff;
-text-shadow:0 0 15px #00e5ff;
-border-bottom:1px solid #1f2937;
-}
-
-.container{max-width:1100px;margin:auto;padding:20px;}
-
-.top-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:15px;
-margin-bottom:25px;
-}
-
-.box{
-background:#0f172a;
-padding:15px;
-border-radius:10px;
-border:1px solid #1f2937;
-box-shadow:0 0 10px rgba(0,229,255,0.1);
-}
-
-.label{font-size:12px;color:#9ca3af;margin-bottom:6px;}
-.value{font-weight:bold;color:#00e5ff;}
-
-.select-input,.qty-input{
-width:100%;
-padding:10px;
-border-radius:8px;
-border:1px solid #1f2937;
-background:#111827;
-color:#fff;
+font-size:28px;
 font-weight:bold;
-transition:0.3s;
-}
-
-.select-input:focus,.qty-input:focus{
-outline:none;
-border-color:#00e5ff;
-box-shadow:0 0 8px #00e5ff;
-}
-
-.section{margin-top:30px;}
-
-.section h2{
-margin-bottom:15px;
-color:#00e5ff;
-font-size:18px;
 letter-spacing:1px;
 }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:15px;
+.tabs{
+display:flex;
+flex-wrap:wrap;
+background:#111827;
 }
 
-.card{
-background:#0f172a;
-padding:15px;
-border-radius:10px;
-border:1px solid #1f2937;
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-3px);
-box-shadow:0 0 12px rgba(0,229,255,0.3);
-}
-
-.price{
-color:#00ffcc;
+.tab-button{
+flex:1;
+padding:12px;
+background:#111827;
+border:none;
+color:white;
+cursor:pointer;
 font-weight:bold;
-margin:6px 0;
+border-bottom:2px solid transparent;
 }
 
-.summary{
-margin-top:30px;
+.tab-button.active{
+border-bottom:2px solid #00aaff;
 background:#0f172a;
-padding:20px;
-border-radius:10px;
-border:1px solid #1f2937;
 }
 
-.total-bar{
-margin-top:15px;
+.tab-content{
+display:none;
+padding:20px;
+}
+
+.tab-content.active{
+display:block;
+}
+
+.product{
 display:flex;
 justify-content:space-between;
 align-items:center;
-flex-wrap:wrap;
-gap:10px;
+background:#1f2937;
+margin:8px 0;
+padding:10px;
+border-radius:8px;
+}
+
+.product input{
+width:80px;
+padding:5px;
+border-radius:5px;
+border:none;
+}
+
+.order-box{
+background:#111827;
+padding:20px;
+margin:20px;
+border-radius:10px;
+}
+
+input, select{
+width:100%;
+padding:8px;
+margin-bottom:10px;
+border-radius:5px;
+border:none;
+}
+
+button.send{
+background:#0066ff;
+color:white;
+border:none;
+padding:15px;
+width:100%;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+}
+
+button.send:hover{
+background:#0052cc;
 }
 
 .total{
 font-size:18px;
+margin-top:10px;
+color:#00aaff;
 font-weight:bold;
-color:#00ffcc;
-}
-
-.usd{
-font-size:14px;
-color:#9ca3af;
-}
-
-.send{
-background:#00e5ff;
-border:none;
-padding:12px 25px;
-border-radius:8px;
-font-weight:bold;
-cursor:pointer;
-transition:0.3s;
-}
-
-.send:hover{
-box-shadow:0 0 15px #00e5ff;
-transform:scale(1.03);
-}
-
-@media(max-width:768px){
-.total-bar{flex-direction:column;align-items:stretch;}
 }
 </style>
 </head>
+
 <body>
 
-<header>LAST STORE</header>
+<header>LAST STORE 🔥</header>
 
-<div class="container">
-
-<div class="top-grid">
-
-<div class="box">
-<div class="label">Order ID</div>
-<div class="value" id="orderID"></div>
+<div class="tabs">
+<button class="tab-button active" onclick="openTab(event,'speed')">Speed Ups</button>
+<button class="tab-button" onclick="openTab(event,'combat')">Combat</button>
+<button class="tab-button" onclick="openTab(event,'resources')">Resources</button>
+<button class="tab-button" onclick="openTab(event,'boosts')">Boosts</button>
+<button class="tab-button" onclick="openTab(event,'special')">Special</button>
 </div>
 
-<div class="box">
-<div class="label">Seller</div>
-<select id="sellerSelect" class="select-input">
-<option value="">Choose Seller</option>
+<!-- SPEED -->
+<div id="speed" class="tab-content active">
+<div class="product"><span>Speed 60m (130)</span><input type="number" data-price="130" oninput="updateTotal()"></div>
+<div class="product"><span>Speed 3h (300)</span><input type="number" data-price="300" oninput="updateTotal()"></div>
+<div class="product"><span>Speed 8h (650)</span><input type="number" data-price="650" oninput="updateTotal()"></div>
+<div class="product"><span>Speed 24h (1500)</span><input type="number" data-price="1500" oninput="updateTotal()"></div>
+<div class="product"><span>Speed 3d (4400)</span><input type="number" data-price="4400" oninput="updateTotal()"></div>
+<div class="product"><span>Speed 7d (10000)</span><input type="number" data-price="10000" oninput="updateTotal()"></div>
+<div class="product"><span>Speed 30d (40000)</span><input type="number" data-price="40000" oninput="updateTotal()"></div>
+</div>
+
+<!-- COMBAT -->
+<div id="combat" class="tab-content">
+<div class="product"><span>Relocator (1500)</span><input type="number" data-price="1500" oninput="updateTotal()"></div>
+<div class="product"><span>Random Relocator (500)</span><input type="number" data-price="500" oninput="updateTotal()"></div>
+<div class="product"><span>Braveheart (2000)</span><input type="number" data-price="2000" oninput="updateTotal()"></div>
+<div class="product"><span>Army Size Boost (2000)</span><input type="number" data-price="2000" oninput="updateTotal()"></div>
+</div>
+
+<!-- RESOURCES -->
+<div id="resources" class="tab-content">
+<div class="product"><span>Food 20M (10000)</span><input type="number" data-price="10000" oninput="updateTotal()"></div>
+<div class="product"><span>Stone 5M (10000)</span><input type="number" data-price="10000" oninput="updateTotal()"></div>
+<div class="product"><span>Wood 5M (10000)</span><input type="number" data-price="10000" oninput="updateTotal()"></div>
+<div class="product"><span>Ore 5M (10000)</span><input type="number" data-price="10000" oninput="updateTotal()"></div>
+<div class="product"><span>Gold 2M (10000)</span><input type="number" data-price="10000" oninput="updateTotal()"></div>
+</div>
+
+<!-- BOOSTS -->
+<div id="boosts" class="tab-content">
+<div class="product"><span>Attack Boost 20% (1500)</span><input type="number" data-price="1500" oninput="updateTotal()"></div>
+<div class="product"><span>Gather Boost 50% 24h (600)</span><input type="number" data-price="600" oninput="updateTotal()"></div>
+<div class="product"><span>Reduce Upkeep 50% 24h (2000)</span><input type="number" data-price="2000" oninput="updateTotal()"></div>
+</div>
+
+<!-- SPECIAL -->
+<div id="special" class="tab-content">
+<div class="product"><span>Gold Hammer (2000)</span><input type="number" data-price="2000" oninput="updateTotal()"></div>
+<div class="product"><span>Archaic Tome (900)</span><input type="number" data-price="900" oninput="updateTotal()"></div>
+<div class="product"><span>500 VIP Points (500)</span><input type="number" data-price="500" oninput="updateTotal()"></div>
+<div class="product"><span>1000 VIP Points (1000)</span><input type="number" data-price="1000" oninput="updateTotal()"></div>
+</div>
+
+<div class="order-box">
+
+<h3>Datos del Pedido</h3>
+
+<label>ID Jugador</label>
+<input type="text" id="playerID">
+
+<label>Método de Pago</label>
+<input type="text" id="payment">
+
+<label>Seleccionar Seller</label>
+<select id="seller">
 <option value="51950501387">Seller 1</option>
 <option value="5491167662445">Seller 2</option>
 <option value="584245125670">Seller 3</option>
@@ -168,155 +184,57 @@ transform:scale(1.03);
 <option value="5493865820180">Seller 6</option>
 <option value="573002560262">Seller 7</option>
 </select>
-</div>
 
-<div class="box">
-<div class="label">Payment Method</div>
-<select id="paymentMethod" class="select-input">
-<option value="">Choose Method</option>
-<option>Binance</option>
-<option>PayPal</option>
-<option>Zelle</option>
-<option>USDT</option>
-<option>Bank Transfer</option>
-</select>
-</div>
+<div class="total">Total Gemas: <span id="total">0</span></div>
 
-</div>
-
-<div id="items"></div>
-
-<div class="summary">
-<h3>Order Summary</h3>
-<div id="summaryList"></div>
-
-<div class="total-bar">
-<div>
-<div class="total">Total Gems: <span id="total">0</span></div>
-<div class="usd">Approx USD: $<span id="usdTotal">0</span></div>
-</div>
-<button class="send" onclick="sendWhatsApp()">Send Order</button>
-</div>
-
-</div>
+<button class="send" onclick="sendOrder()">Enviar Pedido</button>
 
 </div>
 
 <script>
 
-const GEM_TO_USD = 0.0005; // 🔥 cambia esto si quieres otro valor
-
-const data={
-speed:[
-{name:"1 Hour Speed Up",price:130},
-{name:"3 Hour Speed Up",price:300},
-{name:"8 Hour Speed Up",price:650},
-{name:"24 Hour Speed Up",price:1500}
-],
-combat:[
-{name:"Relocator",price:1500},
-{name:"24h Shield",price:1000}
-],
-boost:[
-{name:"Attack Boost 20% 24h",price:400}
-],
-resources:[
-{name:"Food 1M",price:10000}
-]
-};
-
-let cart={};
-let orderID="";
-
-function generateOrderID(){
-const now=new Date();
-orderID="LS-"+now.getFullYear().toString().slice(2)+
-(now.getMonth()+1)+
-now.getDate()+
-Math.floor(Math.random()*10000);
-document.getElementById("orderID").innerText=orderID;
+function openTab(evt, tab){
+document.querySelectorAll(".tab-content").forEach(t=>t.classList.remove("active"));
+document.querySelectorAll(".tab-button").forEach(b=>b.classList.remove("active"));
+document.getElementById(tab).classList.add("active");
+evt.currentTarget.classList.add("active");
 }
 
-function render(){
-const container=document.getElementById("items");
+function updateTotal(){
+let total=0;
+document.querySelectorAll(".product input").forEach(input=>{
+let qty=parseInt(input.value)||0;
+let price=parseInt(input.dataset.price);
+total+=qty*price;
+});
+document.getElementById("total").innerText=total;
+}
 
-for(const cat in data){
-let section=document.createElement("div");
-section.className="section";
-section.innerHTML=`<h2>${cat.toUpperCase()}</h2><div class="grid"></div>`;
-let grid=section.querySelector(".grid");
+function sendOrder(){
+let seller=document.getElementById("seller").value;
+let player=document.getElementById("playerID").value;
+let payment=document.getElementById("payment").value;
+let total=document.getElementById("total").innerText;
 
-data[cat].forEach(item=>{
-let key=cat+"_"+item.name.replace(/\s/g,'');
+let orderID="LS-"+Math.floor(Math.random()*1000000);
 
-let card=document.createElement("div");
-card.className="card";
-card.innerHTML=`
-<div>${item.name}</div>
-<div class="price">${item.price} Gems</div>
-<input type="number" min="0" value="0"
-class="qty-input"
-oninput="updateInput('${key}',${item.price},this.value)">
-`;
+let message="🔥 LAST STORE 🔥%0A";
+message+="Order ID: "+orderID+"%0A";
+message+="ID Jugador: "+player+"%0A";
+message+="Método Pago: "+payment+"%0A%0A";
 
-grid.appendChild(card);
+document.querySelectorAll(".product").forEach(p=>{
+let name=p.querySelector("span").innerText;
+let qty=p.querySelector("input").value;
+if(qty>0){
+message+=name+" x"+qty+"%0A";
+}
 });
 
-container.appendChild(section);
+message+="%0ATotal Gemas: "+total;
+
+window.open("https://wa.me/"+seller+"?text="+message,"_blank");
 }
-}
-
-function updateInput(key,price,value){
-let qty=parseInt(value);
-if(isNaN(qty)||qty<0) qty=0;
-cart[key]={qty:qty,price:price};
-updateSummary();
-}
-
-function updateSummary(){
-let total=0;
-let html="";
-
-for(const key in cart){
-if(cart[key].qty>0){
-let sub=cart[key].qty*cart[key].price;
-total+=sub;
-html+=`${key.replace(/_/g,' ')} x${cart[key].qty} = ${sub}<br>`;
-}
-}
-
-document.getElementById("summaryList").innerHTML=html;
-document.getElementById("total").innerText=total;
-document.getElementById("usdTotal").innerText=(total*GEM_TO_USD).toFixed(2);
-}
-
-function sendWhatsApp(){
-let total=document.getElementById("total").innerText;
-let seller=document.getElementById("sellerSelect").value;
-let payment=document.getElementById("paymentMethod").value;
-
-if(total==0){alert("Add items.");return;}
-if(seller==""){alert("Select seller.");return;}
-if(payment==""){alert("Select payment method.");return;}
-
-let msg="🔥 LAST STORE ORDER 🔥%0A";
-msg+="Order ID: "+orderID+"%0A";
-msg+="Payment: "+payment+"%0A";
-msg+="Approx USD: $"+(total*GEM_TO_USD).toFixed(2)+"%0A%0A";
-
-for(const key in cart){
-if(cart[key].qty>0){
-msg+=key.replace(/_/g,' ')+" x"+cart[key].qty+"%0A";
-}
-}
-
-msg+="%0ATotal Gems: "+total;
-
-window.location.href=`https://wa.me/${seller}?text=${msg}`;
-}
-
-generateOrderID();
-render();
 
 </script>
 
