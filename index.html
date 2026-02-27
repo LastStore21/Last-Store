@@ -3,90 +3,143 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Last Store - GOD</title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>Last Store</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Segoe UI,Arial;}
-body{background:linear-gradient(135deg,#071a3d,#0c2f6b);color:#fff;}
-header{background:#02122b;padding:20px;text-align:center;font-size:32px;font-weight:900;color:#00cfff;letter-spacing:2px;}
-.container{max-width:1400px;margin:auto;padding:20px;}
-.controls{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:25px;}
-.controls input,.controls select{
-padding:10px;border-radius:8px;border:none;font-size:14px;
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;}
+
+body{
+background:radial-gradient(circle at top,#111827,#05070d);
+color:#fff;
 }
-.section{margin-bottom:40px;}
+
+header{
+text-align:center;
+padding:25px;
+font-size:30px;
+font-weight:800;
+letter-spacing:2px;
+color:#00e5ff;
+text-shadow:0 0 15px #00e5ff;
+border-bottom:1px solid #1f2937;
+}
+
+.container{max-width:1100px;margin:auto;padding:20px;}
+
+.top-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:15px;
+margin-bottom:25px;
+}
+
+.box{
+background:#0f172a;
+padding:15px;
+border-radius:10px;
+border:1px solid #1f2937;
+box-shadow:0 0 10px rgba(0,229,255,0.1);
+}
+
+.label{font-size:12px;color:#9ca3af;margin-bottom:6px;}
+.value{font-weight:bold;color:#00e5ff;}
+
+.select-input,.qty-input{
+width:100%;
+padding:10px;
+border-radius:8px;
+border:1px solid #1f2937;
+background:#111827;
+color:#fff;
+font-weight:bold;
+transition:0.3s;
+}
+
+.select-input:focus,.qty-input:focus{
+outline:none;
+border-color:#00e5ff;
+box-shadow:0 0 8px #00e5ff;
+}
+
+.section{margin-top:30px;}
+
 .section h2{
 margin-bottom:15px;
-border-left:5px solid #00cfff;
-padding-left:10px;
-display:flex;
-justify-content:space-between;
-align-items:center;
+color:#00e5ff;
+font-size:18px;
+letter-spacing:1px;
 }
+
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
 gap:15px;
 }
+
 .card{
-background:#0e2f6f;
+background:#0f172a;
 padding:15px;
-border-radius:12px;
-transition:.3s;
-box-shadow:0 5px 15px rgba(0,0,0,.5);
+border-radius:10px;
+border:1px solid #1f2937;
+transition:0.3s;
 }
-.card:hover{transform:translateY(-5px);}
-.price{color:#00e1ff;font-weight:bold;margin:5px 0;}
-.qty-control{display:flex;justify-content:space-between;align-items:center;}
-.qty-control button{
-width:30px;height:30px;
-border:none;border-radius:6px;
-background:#00cfff;color:#000;
-font-weight:bold;cursor:pointer;
+
+.card:hover{
+transform:translateY(-3px);
+box-shadow:0 0 12px rgba(0,229,255,0.3);
 }
-.qty{font-weight:bold;}
+
+.price{
+color:#00ffcc;
+font-weight:bold;
+margin:6px 0;
+}
+
 .summary{
-position:fixed;
-right:20px;
-bottom:120px;
-width:300px;
-background:#02122b;
-padding:15px;
-border-radius:12px;
-max-height:350px;
-overflow:auto;
+margin-top:30px;
+background:#0f172a;
+padding:20px;
+border-radius:10px;
+border:1px solid #1f2937;
 }
+
 .total-bar{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-background:#010c1f;
-padding:15px;
+margin-top:15px;
 display:flex;
-flex-wrap:wrap;
 justify-content:space-between;
 align-items:center;
+flex-wrap:wrap;
 gap:10px;
 }
-.total{font-size:18px;font-weight:bold;color:#00e1ff;}
+
+.total{
+font-size:18px;
+font-weight:bold;
+color:#00ffcc;
+}
+
+.usd{
+font-size:14px;
+color:#9ca3af;
+}
+
 .send{
-background:#00cfff;
+background:#00e5ff;
 border:none;
-padding:10px 25px;
+padding:12px 25px;
 border-radius:8px;
 font-weight:bold;
 cursor:pointer;
+transition:0.3s;
 }
-.preview img{
-width:70px;
-border-radius:6px;
-margin:5px;
+
+.send:hover{
+box-shadow:0 0 15px #00e5ff;
+transform:scale(1.03);
 }
+
 @media(max-width:768px){
-.summary{position:static;margin-top:20px;width:100%;}
+.total-bar{flex-direction:column;align-items:stretch;}
 }
 </style>
 </head>
@@ -96,41 +149,17 @@ margin:5px;
 
 <div class="container">
 
-<div class="controls">
-<input type="text" id="search" placeholder="Search item...">
-<select id="categoryFilter">
-<option value="all">All Categories</option>
-<option value="speed">Speed Ups</option>
-<option value="combat">Combat</option>
-<option value="boost">Boost</option>
-<option value="resources">Resources</option>
-<option value="chest">Chests</option>
-<option value="building">Building</option>
-<option value="familiar">Familiar</option>
-<option value="monster">Monster Hunt</option>
-</select>
+<div class="top-grid">
 
-<input type="number" id="minPrice" placeholder="Min Gems">
-<input type="number" id="maxPrice" placeholder="Max Gems">
+<div class="box">
+<div class="label">Order ID</div>
+<div class="value" id="orderID"></div>
 </div>
 
-<div id="items"></div>
-
-<h3 style="margin-top:20px;">Upload Screenshots</h3>
-<input type="file" id="images" multiple accept="image/*">
-<div class="preview" id="preview"></div>
-
-</div>
-
-<div class="summary">
-<h3>Order Summary</h3>
-<div id="summaryList"></div>
-</div>
-
-<div class="total-bar">
-<div class="total">Total Gems: <span id="total">0</span></div>
-
-<select id="seller">
+<div class="box">
+<div class="label">Seller</div>
+<select id="sellerSelect" class="select-input">
+<option value="">Choose Seller</option>
 <option value="51950501387">Seller 1</option>
 <option value="5491167662445">Seller 2</option>
 <option value="584245125670">Seller 3</option>
@@ -139,11 +168,43 @@ margin:5px;
 <option value="5493865820180">Seller 6</option>
 <option value="573002560262">Seller 7</option>
 </select>
+</div>
 
-<button class="send" onclick="sendWhatsApp()">Send to WhatsApp</button>
+<div class="box">
+<div class="label">Payment Method</div>
+<select id="paymentMethod" class="select-input">
+<option value="">Choose Method</option>
+<option>Binance</option>
+<option>PayPal</option>
+<option>Zelle</option>
+<option>USDT</option>
+<option>Bank Transfer</option>
+</select>
+</div>
+
+</div>
+
+<div id="items"></div>
+
+<div class="summary">
+<h3>Order Summary</h3>
+<div id="summaryList"></div>
+
+<div class="total-bar">
+<div>
+<div class="total">Total Gems: <span id="total">0</span></div>
+<div class="usd">Approx USD: $<span id="usdTotal">0</span></div>
+</div>
+<button class="send" onclick="sendWhatsApp()">Send Order</button>
+</div>
+
+</div>
+
 </div>
 
 <script>
+
+const GEM_TO_USD = 0.0005; // 🔥 cambia esto si quieres otro valor
 
 const data={
 speed:[
@@ -161,49 +222,43 @@ boost:[
 ],
 resources:[
 {name:"Food 1M",price:10000}
-],
-chest:[
-{name:"Material Chest",price:1500}
-],
-building:[
-{name:"Building Speed 1h",price:130}
-],
-familiar:[
-{name:"Familiar Energy 5000",price:1125}
-],
-monster:[
-{name:"Monster Energy 5000",price:1125}
 ]
 };
 
 let cart={};
+let orderID="";
+
+function generateOrderID(){
+const now=new Date();
+orderID="LS-"+now.getFullYear().toString().slice(2)+
+(now.getMonth()+1)+
+now.getDate()+
+Math.floor(Math.random()*10000);
+document.getElementById("orderID").innerText=orderID;
+}
 
 function render(){
 const container=document.getElementById("items");
-container.innerHTML="";
+
 for(const cat in data){
 let section=document.createElement("div");
 section.className="section";
-section.dataset.cat=cat;
-
-let totalCat=0;
-if(cart[cat]) totalCat=cart[cat];
-
-section.innerHTML=`<h2>${cat.toUpperCase()} <span>(Items: ${totalCat})</span></h2><div class="grid"></div>`;
+section.innerHTML=`<h2>${cat.toUpperCase()}</h2><div class="grid"></div>`;
 let grid=section.querySelector(".grid");
 
 data[cat].forEach(item=>{
+let key=cat+"_"+item.name.replace(/\s/g,'');
+
 let card=document.createElement("div");
 card.className="card";
 card.innerHTML=`
 <div>${item.name}</div>
 <div class="price">${item.price} Gems</div>
-<div class="qty-control">
-<button onclick="update('${cat}','${item.name}',${item.price},-1)">-</button>
-<div id="${cat}_${item.name}" class="qty">0</div>
-<button onclick="update('${cat}','${item.name}',${item.price},1)">+</button>
-</div>
+<input type="number" min="0" value="0"
+class="qty-input"
+oninput="updateInput('${key}',${item.price},this.value)">
 `;
+
 grid.appendChild(card);
 });
 
@@ -211,58 +266,59 @@ container.appendChild(section);
 }
 }
 
-function update(cat,name,price,change){
-let key=cat+"_"+name;
-if(!cart[key]) cart[key]={qty:0,price:price,cat:cat,name:name};
-cart[key].qty+=change;
-if(cart[key].qty<0) cart[key].qty=0;
-document.getElementById(key).innerText=cart[key].qty;
+function updateInput(key,price,value){
+let qty=parseInt(value);
+if(isNaN(qty)||qty<0) qty=0;
+cart[key]={qty:qty,price:price};
 updateSummary();
-render();
 }
 
 function updateSummary(){
 let total=0;
 let html="";
+
 for(const key in cart){
 if(cart[key].qty>0){
 let sub=cart[key].qty*cart[key].price;
 total+=sub;
-html+=`${cart[key].name} x${cart[key].qty} = ${sub}<br>`;
+html+=`${key.replace(/_/g,' ')} x${cart[key].qty} = ${sub}<br>`;
 }
 }
+
 document.getElementById("summaryList").innerHTML=html;
 document.getElementById("total").innerText=total;
+document.getElementById("usdTotal").innerText=(total*GEM_TO_USD).toFixed(2);
 }
 
 function sendWhatsApp(){
-let seller=document.getElementById("seller").value;
-let msg="🔥 LAST STORE ORDER 🔥%0A%0A";
+let total=document.getElementById("total").innerText;
+let seller=document.getElementById("sellerSelect").value;
+let payment=document.getElementById("paymentMethod").value;
+
+if(total==0){alert("Add items.");return;}
+if(seller==""){alert("Select seller.");return;}
+if(payment==""){alert("Select payment method.");return;}
+
+let msg="🔥 LAST STORE ORDER 🔥%0A";
+msg+="Order ID: "+orderID+"%0A";
+msg+="Payment: "+payment+"%0A";
+msg+="Approx USD: $"+(total*GEM_TO_USD).toFixed(2)+"%0A%0A";
+
 for(const key in cart){
 if(cart[key].qty>0){
-msg+=cart[key].name+" x"+cart[key].qty+"%0A";
+msg+=key.replace(/_/g,' ')+" x"+cart[key].qty+"%0A";
 }
 }
-msg+="%0ATotal Gems: "+document.getElementById("total").innerText;
+
+msg+="%0ATotal Gems: "+total;
+
 window.location.href=`https://wa.me/${seller}?text=${msg}`;
 }
 
-document.getElementById("images").addEventListener("change",function(){
-let preview=document.getElementById("preview");
-preview.innerHTML="";
-Array.from(this.files).forEach(file=>{
-let reader=new FileReader();
-reader.onload=e=>{
-let img=document.createElement("img");
-img.src=e.target.result;
-preview.appendChild(img);
-};
-reader.readAsDataURL(file);
-});
-});
-
+generateOrderID();
 render();
 
 </script>
+
 </body>
 </html>
